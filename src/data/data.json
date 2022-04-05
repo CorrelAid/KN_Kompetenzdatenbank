@@ -1,0 +1,28 @@
+[
+  {"Vorname":"Zoé",
+    "Nachname":"Wolter",
+    "Skills":["Organisation", "Reiten", "R", "Blue Prison"],
+    "Bild": "",
+    "id": 2},
+  {"Vorname":"Schmi",
+    "Nachname":"Schma",
+    "Skills":["Python", "Perl", "R"],
+    "Bild": "",
+    "id": 3},
+  {"Vorname":"Jane",
+    "Nachname":"Doe",
+    "Skills":["Python", "Svelte", "Data Science"],
+    "Bild": "",
+    "id": 4},
+    {"Vorname":"Jonas",
+      "Nachname":"Stettner",
+      "Skills":["Python", "Javascript", "R"],
+      "Bild": "1.jpeg",
+      "id": 1},
+  {"Vorname":"Max",
+    "Nachname":"Muster",
+    "Skills":["Java", "Web Development", "Backend"],
+    "Bild": "",
+    "id": 5}
+
+]
