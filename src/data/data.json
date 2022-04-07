@@ -17,7 +17,7 @@
     {"Vorname":"Jonas",
       "Nachname":"Stettner",
       "Skills":["Python", "Javascript", "R"],
-      "Bild": "1.jpeg",
+      "Bild": "",
       "id": 1},
   {"Vorname":"Max",
     "Nachname":"Muster",
