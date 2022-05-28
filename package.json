@@ -1,26 +1,22 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "rollup": "^2.3.4",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "svelte": "^3.0.0"
-  },
-  "dependencies": {
-    "bulma": "^0.9.3",
-    "sirv-cli": "^2.0.0"
-  },
-  "license": "MIT"
+	"name": "kompetenzdatenbank-sveltekit",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"prepare": "svelte-kit sync"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"svelte": "^3.44.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@supabase/supabase-js": "^1.35.3",
+		"bulma": "^0.9.4",
+		"sass": "^1.52.1"
+	}
 }

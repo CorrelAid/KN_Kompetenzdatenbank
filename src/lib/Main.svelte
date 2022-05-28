@@ -1,13 +1,14 @@
 <script>
-	import Entry from "./Entry.svelte";
-	import Header from "./Header.svelte";
-	import Search from "./Search.svelte";
+	import Entry from "$lib/Entry.svelte";
 
-	import data from "./data/data.json";
+	import Search from "$lib/Search.svelte";
+
+	import data from "$lib/data/data.json";
 
 	let search = "";
 
 	console.log(data);
+
 
 	$: visibleEntries = search
 		? data.filter((row) => {
@@ -24,8 +25,6 @@
 		  })
 		: data;
 </script>
-
-<Header />
 
 <Search number_entries={data.length} bind:value={search} />
 
