@@ -2,8 +2,9 @@
   import { supabase } from "$lib/supabaseClient";
 
   let email;
-  let done = false
-  let loading = false
+  let done = false;
+  let loading = false;
+  let error_msg = "";
 
   const handleSignup = async () => {
     const { data: user, error } = await supabase.auth.api.inviteUserByEmail(
@@ -13,19 +14,23 @@
 
   const handleLogin = async () => {
     try {
-      done = false
       loading = true
-      const { error } = await supabase.auth.signIn({ email });
-      if (error) throw error;
-    } catch (error) {
-      console.log(error.error_description || error.message);
-    } finally {
+      const { error } = await supabase.auth.signIn({ email })
       done = true
-      loading = false
+      error_msg = ""
+      if (error) throw error
+    } catch (error) {
+      error_msg = error.error_description || error.message
+      done = false
+    } finally {
+        loading = false
+    
     }
   };
 
-  $: console.log(done);
+  const hide_not = function () {
+    done = false;
+  }
 </script>
 
 <p class="is-size-5 mb-3">
@@ -42,18 +47,18 @@
 >
   <input
     class="input is-medium"
-    type="email"
     placeholder="Email"
     bind:value={email}
   />
   <span class="icon is-medium is-left">
     <i class="fas fa-envelope" />
   </span>
+  <p class="help is-danger">{error_msg}</p>
 
   <input type="submit" class="button mt-3 is-medium" value={loading ? "Loading" : "Send magic link"} disabled={loading}/>
 </form>
 
 <div class="notification is-info" style={done ? 'display: static;' : 'display: none;'}>
-  <button class="delete" />
+  <button class="delete" on:click={hide_not}/>
   E-Mail ist auf dem Weg! Schau mal in dein Postfach.
 </div>

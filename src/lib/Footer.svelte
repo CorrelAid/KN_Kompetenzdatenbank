@@ -1,23 +1,27 @@
 <script>
-let visible = false;
+ import { supabase } from "$lib/supabaseClient";
+
+export let logout_visible = false;
+
+async function signOut() {
+        try {
+            let { error } = await supabase.auth.signOut();
+            if (error) throw error;
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+        }
+    }
 </script>
+
 <footer class="has-background-light py-4 level m-0">
     <div class="level-left pl-3">
         <div class="level-item">
-            {#if visible}
-            <p class="subtitle is-6">
-                <strong>Logout</strong> 
-              </p>
+            {#if logout_visible}
+            <button class="button block" on:click={signOut}> Sign Out </button>
               {/if}
         </div>
     </div>  
-    <div class="level-right pr-3">
-        <div class="level-item">
-            <p class="subtitle is-6">
-                <strong>Administration</strong> 
-              </p>
-        </div>
-    </div>
   </footer>
 
   <style>

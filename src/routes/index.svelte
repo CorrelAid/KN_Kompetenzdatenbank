@@ -3,35 +3,37 @@
     import { supabase } from "$lib/supabaseClient";
     import Auth from "$lib/Auth.svelte";
     import Main from "$lib/Main.svelte";
+    import Header from "$lib/Header.svelte";
+    import Footer from "../lib/Footer.svelte";
 
-    user.set(supabase.auth.user());
+    async function get_user(){
+        user.set(supabase.auth.user());
+    }
+
+    const promise = get_user()
+    
 
     supabase.auth.onAuthStateChange((event, session) => {
         if (event == "SIGNED_IN") {
             user.set(session.user);
-        } else if (event == 'SIGNED_OUT'){
-            window.location.reload();
+        } else if (event == "SIGNED_OUT") {
+            user.set(null);
         }
     });
 
-    async function signOut() {
-        try {
-            let { error } = await supabase.auth.signOut();
-            if (error) throw error;
-        } catch (error) {
-            alert(error.message);
-        } finally {
-        }   
-    }
 </script>
 
+<Header />
 <div class="container" style="padding: 50px 0 100px 0;">
-    {#if $user}
-        <div>
-            <button class="button block" on:click={signOut}> Sign Out </button>
-        </div>
-        <Main />
-    {:else}
-        <Auth />
+    {#await promise}
+        <p>Loading Authentication Data...</p>
+    {:then nothing} 
+        {#if $user}
+            <Main />
+        {:else}
+            <Auth />
     {/if}
+    {/await}
+    
 </div>
+<Footer logout_visible={$user}/>

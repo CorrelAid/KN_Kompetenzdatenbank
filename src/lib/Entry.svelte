@@ -1,19 +1,19 @@
 <script>
   export let Vorname;
   export let Nachname;
-  export let Skills;
-  export let Bild;
+  // export let Skills;
+  // export let Bild;
   export let id;
 </script>
 
 <tr>
   <td>
     <figure class="image image is-4by5">
-      {#if Bild == ""}
+      <!-- {#if Bild == ""}
         <img src="/img/placeholder.png" alt="picture placeholder" />
       {:else}
         <img src="img/{id}.jpeg" alt="picture of {Vorname} {Nachname}" />
-      {/if}
+      {/if} -->
     </figure>
   </td>
   <td>
@@ -23,10 +23,10 @@
     {Nachname}
   </td>
   <td>
-    {#each Skills as skill}
+    <!-- {#each Skills as skill}
       <span class="tag">
         {skill}
       </span>
-    {/each}
+    {/each} -->
   </td>
 </tr>
