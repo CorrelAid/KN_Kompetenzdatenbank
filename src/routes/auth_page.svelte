@@ -1,32 +1,43 @@
-<script>
-  import { supabase } from "$lib/supabaseClient";
+<script context="module">
+  export async function load({ session }) {
+    if (typeof session.authenticated != "undefined") {
+    return {
+        status: 302,
+        redirect: "/"
+    }
+    }
+    return{
 
+    }
+    };
+</script>
+
+<script>
   let email;
   let done = false;
   let loading = false;
   let error_msg = "";
 
-  const handleSignup = async () => {
-    const { data: user, error } = await supabase.auth.api.inviteUserByEmail(
-      "jstet@tuta.io"
-    );
-  };
+  
 
-  const handleLogin = async () => {
-    try {
-      loading = true
-      const { error } = await supabase.auth.signIn({ email })
-      done = true
-      error_msg = ""
-      if (error) throw error
-    } catch (error) {
-      error_msg = error.error_description || error.message
-      done = false
-    } finally {
-        loading = false
+  async function handleLogin() {
+    loading = true
     
+    const response = await fetch('/login', {
+      method: 'post',
+      body: JSON.stringify({email})
+    })
+    error_msg = ""
+    if (response.ok) {
+      done = true
+      }
+    else {
+      error_msg = (await response.text())
     }
-  };
+
+    loading = false
+    
+  }
 
   const hide_not = function () {
     done = false;
