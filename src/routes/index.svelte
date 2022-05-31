@@ -16,9 +16,16 @@
 
 <script>
   import Main from "$lib/Main.svelte";
-  import Footer from "../lib/Footer.svelte";
+  import {get_data} from "$lib/db_queries.js";
+  import { onMount } from 'svelte';
 
   let data = [];
+
+  onMount(async () => {
+		data = await get_data();
+	});
+
+  $: console.log(data)
 </script>
 
 <Main {data} />

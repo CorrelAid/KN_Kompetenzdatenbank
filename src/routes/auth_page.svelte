@@ -7,9 +7,9 @@
     }
     }
     return{
-
+      
     }
-    };
+  }
 </script>
 
 <script>
@@ -17,8 +17,6 @@
   let done = false;
   let loading = false;
   let error_msg = "";
-
-  
 
   async function handleLogin() {
     loading = true

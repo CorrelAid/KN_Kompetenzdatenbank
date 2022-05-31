@@ -1,30 +1,18 @@
 <script>
-    import { signOut } from '$lib/auth';
+    import { signOut } from "$lib/auth";
     import Modal from "$lib/Modal.svelte";
 
     export let logout_visible = false;
     export let admin;
 
-    console.log(logout_visible)
-    
+    console.log(logout_visible);
 
     let modal_pkg = {
         modal: false,
         modal_title: "",
     };
 
-    // async function signOut() {
-    //     try {
-    //         let { error } = await supabase.auth.signOut();
-    //         location.reload();
-    //         if (error) throw error;
-    //     } catch (error) {
-    //         console.log(error.message);
-    //     } finally {
-    //     }
-    // }
-
-    async function handle_signOut(){
+    async function handle_signOut() {
         await signOut();
         location.reload();
     }
@@ -51,46 +39,35 @@
     }
 </script>
 
-<footer class="has-background-light py-4 level m-0">
-    <div class="level-left pl-3">
-        <div class="level-item">
-            <!-- session.authenticates returns string -->
-            {#if logout_visible.includes("true")} 
-                <button class="button block" on:click={handle_signOut}>
-                    Sign Out
-                </button>
-            {/if}
-        </div>
-    </div>
-    <div class="level-item">
-        <h2>Impressum</h2>
-    </div>
-    {#if admin == true && logout_visible.includes("true")}
-        <div class="level-right pr-3">
-            <div class="level-item">
-                <h2 class="is-size-6">
-                    <strong>Administration Functions:</strong>
-                </h2>
-            </div>
-            <div class="level-item">
-                <button class="button block" on:click={upload_data}>
-                    Upload data
-                </button>
-            </div>
-            <div class="level-item">
-                <button class="button block" on:click={upload_pictures}>
-                    Upload Pictures
-                </button>
-            </div>
-            <div class="level-item">
-                <button class="button block" on:click={send_invitations}>
-                    Send invitations
-                </button>
-            </div>
+<footer class="has-background-light columns is-mobile is-vcentered m-0">
+    {#if logout_visible.includes("true")}
+        <div class="column">
+            <button class="button block" on:click={handle_signOut}>
+                Sign Out
+            </button>
         </div>
     {/if}
+    {#if admin == true && logout_visible.includes("true")}
+        <div class="column ">
+            <!-- session.authenticated returns string -->
+            <button class="button block is-primary m-0 mx-2" on:click={upload_data}>
+                Upload data
+            </button>
+
+            <button class="button block is-primary m-0 mx-2" on:click={upload_pictures}>
+                Upload Pictures
+            </button>
+
+            <button class="button block is-primary m-0 mx-2" on:click={send_invitations}>
+                Send invitations
+            </button>
+        </div>
+    {/if}
+    <div class="column has-text-centered">
+            <h2>Impressum</h2>
+    </div>
 </footer>
-<Modal {...modal_pkg}/>
+<Modal {...modal_pkg} />
 
 <style>
     footer {
@@ -100,4 +77,5 @@
         width: 100%;
         text-align: center;
     }
+
 </style>

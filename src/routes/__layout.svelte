@@ -3,7 +3,6 @@
   import Header from "$lib/Header.svelte";
   import Footer from "$lib/Footer.svelte";
   import { session} from "$app/stores";
-  import { get } from 'svelte/store';
   import { auth, setAuthCookie, unsetAuthCookie } from "$lib/auth";
 
   session.subscribe((sessionData) => {console.log(sessionData) }); 
@@ -30,7 +29,12 @@
 </svelte:head>
 
 <Header />
-<div class="container" style="padding: 50px 0 100px 0;">
+<div class="container">
   <slot />
 </div>
 <Footer logout_visible={$session.authenticated}, admin = {admin}/>
+
+
+<style>
+ 
+</style>

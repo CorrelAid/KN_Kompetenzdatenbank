@@ -1,7 +1,13 @@
 <script>
-  export let Vorname;
-  export let Nachname;
-  // export let Skills;
+  export let vorname;
+  export let nachname;
+  export let email;
+  export let job;
+  export let programming;
+  export let datascience;
+  export let webdev;
+  export let math;
+  export let other;
   // export let Bild;
   export let id;
 </script>
@@ -17,10 +23,31 @@
     </figure>
   </td>
   <td>
-    {Vorname}
+    {vorname}
   </td>
   <td>
-    {Nachname}
+    {nachname}
+  </td>
+  <td>
+    {email}
+  </td>
+  <td>
+    {job}
+  </td>
+  <td>
+    {programming}
+  </td>
+  <td>
+    {datascience}
+  </td>
+  <td>
+    {webdev}
+  </td>
+  <td>
+    {math}
+  </td>
+  <td>
+    {other}
   </td>
   <td>
     <!-- {#each Skills as skill}
