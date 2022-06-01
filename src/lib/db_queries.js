@@ -43,3 +43,16 @@ export const get_pictures = async function () {
 })
 return data
 }
+
+export const check_email = async function(x){
+  console.log(x)
+  const { data, error } = await supabase
+  .from('auth_roles')
+  .select("email, admin")
+  .eq("email", x)
+  if (data.length == 1){
+    console.log("y")
+    return true
+  }
+  
+}
