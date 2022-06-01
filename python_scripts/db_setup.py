@@ -18,48 +18,27 @@ conn = psycopg2.connect(user="postgres", password=db_pw, host=db_host, port="543
 
 cur = conn.cursor()
 cur.execute("""
--- STORAGE -------------------
-insert into storage.buckets (id, name)
-values ('pictures', 'pictures');
-
-DROP POLICY IF EXISTS p1 ON storage.objects CASCADE;
-
-create policy p1
-on storage.objects for select
-using (
-  bucket_id = 'pictures'
-  and auth.role() = 'authenticated'
-);
-
-create policy p2
-on storage.objects for insert
-with check (
-     auth.uid() in (
-       select get_admins()
-     )
-)
-
--- -------------------
-
 -- ADMINS -------------------
 CREATE TABLE public.admin_emails(
     email varchar(254) NOT NULL PRIMARY KEY UNIQUE
 );
 
-DROP TABLE IF EXISTS admins;
-
-CREATE TABLE public.admins(
+CREATE TABLE public.auth_roles(
     email varchar(254) NOT NULL PRIMARY KEY UNIQUE,
-    id uuid references auth.users 
+    admin boolean NOT NULL,
+    id uuid references auth.users
 );
 
---  TRIGGER for admins -------------------
+--  TRIGGER for auth roles -------------------
 create or replace function public.handle_new_user() 
 returns trigger as $$
 begin
     if new.email in (SELECT email FROM public.admin_emails) then
-        insert into public.admins (id, email)
-        values (new.id, new.email);
+        insert into public.auth_roles (id, email, admin)
+        values (new.id, new.email, TRUE);
+    else
+      insert into public.auth_roles (id, email, admin)
+        values (new.id, new.email, FALSE);
     end if;
     return new;
 end;
@@ -106,18 +85,39 @@ set search_path = public
 stable
 as $$
     select id
-    from public.admins
-    where id = auth.uid()
+    from public.auth_roles
+    where id = auth.uid() AND admin = TRUE
 $$;
 
-create policy "Only authenticated admins can insert and delete data"
+create policy "Only authenticated admins can insert data"
   on main
   for insert with check (
     auth.uid() in (
       select get_admins()
     )
   )
-           
+-- STORAGE -------------------
+insert into storage.buckets (id, name)
+values ('pictures', 'pictures');
+
+DROP POLICY IF EXISTS p1 ON storage.objects CASCADE;
+
+create policy p1
+on storage.objects for select
+using (
+  bucket_id = 'pictures'
+  and auth.role() = 'authenticated'
+);
+
+create policy p2
+on storage.objects for insert
+with check (
+     auth.uid() in (
+       select get_admins()
+     )
+)
+
+-- -------------------   
 """)
 
 conn.commit()

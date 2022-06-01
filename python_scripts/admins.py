@@ -21,6 +21,7 @@ try:
     print(supabase.table("admin_emails").insert({"email":sys.argv[1]}).execute())
 except Exception as e:
     print(e)
+    sys.exit()
     
 try:
     supabase.auth.sign_in(email=sys.argv[1])
