@@ -1,6 +1,5 @@
 <script context="module">
-  import { get_pictures } from "$lib/db_queries.js";
-  import { get_data } from "$lib/db_queries.js";
+  import { get_pictures, get_data } from "$lib/db_queries.js";
 
   let data;
   let pictures;
