@@ -1,3 +1,15 @@
+
+-- neccessary to access storage through python somehow
+ALTER TABLE storage.objects OWNER TO postgres
+
+-- cant run this in python somehow
+-- create policy "Restricted Access"
+-- on storage.objects for select
+-- using (
+--   bucket_id = 'images'
+--   and auth.role() = 'authenticated'
+-- )
+
 CREATE TABLE IF NOT EXISTS main( 
     id SERIAL NOT NULL PRIMARY KEY,
     email varchar(254),
@@ -41,6 +53,7 @@ create policy "Only authenticated admins can insert and delete data"
     )
   )
 
+-- drop function public.handle_new_user() cascade;
 
 -- CREATE TABLE programming(
 --     id int NOT NULL PRIMARY KEY,

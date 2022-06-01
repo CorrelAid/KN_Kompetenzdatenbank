@@ -23,6 +23,7 @@
 
 <svelte:head>
   <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="global.css">
   <script
     src="https://kit.fontawesome.com/a3e38f6c6f.js"
     crossorigin="anonymous"></script>
@@ -35,6 +36,6 @@
 <Footer logout_visible={$session.authenticated}, admin = {admin}/>
 
 
-<style>
- 
+<style global> 
+
 </style>

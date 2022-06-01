@@ -1,0 +1,5 @@
+body, html, #svelte_body{
+    overflow: hidden;
+    height: 100%;
+    overflow-y: hidden
+  }

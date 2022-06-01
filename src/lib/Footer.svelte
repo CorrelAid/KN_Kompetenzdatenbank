@@ -5,8 +5,6 @@
     export let logout_visible = false;
     export let admin;
 
-    console.log(logout_visible);
-
     let modal_pkg = {
         modal: false,
         modal_title: "",
@@ -17,21 +15,14 @@
         location.reload();
     }
 
-    async function upload_data() {
+    function upload_data() {
         modal_pkg = {
             modal: true,
             modal_title: "Upload Data",
         };
     }
 
-    async function upload_pictures() {
-        modal_pkg = {
-            modal: true,
-            modal_title: "Upload Pictures",
-        };
-    }
-
-    async function send_invitations() {
+    function send_invitations() {
         modal_pkg = {
             modal: true,
             modal_title: "Send Invitations",
@@ -52,10 +43,6 @@
             <!-- session.authenticated returns string -->
             <button class="button block is-primary m-0 mx-2" on:click={upload_data}>
                 Upload data
-            </button>
-
-            <button class="button block is-primary m-0 mx-2" on:click={upload_pictures}>
-                Upload Pictures
             </button>
 
             <button class="button block is-primary m-0 mx-2" on:click={send_invitations}>

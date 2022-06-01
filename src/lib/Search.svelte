@@ -7,7 +7,7 @@
 	<!-- Left side -->
 	<div class="px-2 level-left">
 		<div class="level-item">
-			<p class="subtitle is-5">
+			<p class="subtitle is-5 is-hidden-mobile">
 				<strong>{number_entries}</strong> Entries
 			</p>
 		</div>
