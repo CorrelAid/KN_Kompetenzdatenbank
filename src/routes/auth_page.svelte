@@ -19,8 +19,8 @@
   let error_msg = "";
 
   async function handleLogin() {
-    loading = true
-    
+    loading = true;
+    done = false;
     const response = await fetch('/login', {
       method: 'post',
       body: JSON.stringify({email})
