@@ -153,8 +153,8 @@
     margin-left: 1vh;
   }
 
-  #mail_p {
+  /* #mail_p {
     font-size: 1.3vh;
     word-wrap: break-word;
-  }
+  } */
 </style>
