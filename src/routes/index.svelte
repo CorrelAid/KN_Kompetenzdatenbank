@@ -25,14 +25,8 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
   import Entry from "$lib/Entry.svelte";
   import Search from "$lib/Search.svelte";
-  
-
-  onMount(async () => {
-   
-  });
 
   export let data;
   export  let pictures;
@@ -67,7 +61,6 @@
  const pic_search = function(x) {
   for(var i=0; i<pictures.length; i++) {
 	if(pictures[i].name == x) {
-		// __FOUND is set to the index of the element
 		return true
 	}
 }

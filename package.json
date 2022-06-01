@@ -9,6 +9,7 @@
 		"prepare": "svelte-kit sync"
 	},
 	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-node": "^1.0.0-next.78",
 		"@sveltejs/kit": "next",
