@@ -14,7 +14,7 @@
   export let found;
   export let picture_of;
 
-  let src;
+  let src = "/img/placeholder.png";
 
   let modal_pkg = {
     modal: false,
