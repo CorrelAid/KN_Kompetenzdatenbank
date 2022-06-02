@@ -8,19 +8,20 @@
     data = await get_data();
     pictures = await get_pictures();
 
-    if (typeof session.authenticated == "undefined") {
+    if (session.authenticated == true) {
+      return {
+        props: {
+          user: session.user,
+          data: data,
+          pictures: pictures,
+        },
+      };
+    } else {
       return {
         status: 302,
         redirect: "/auth_page",
       };
     }
-    return {
-      props: {
-        user: session.user,
-        data: data,
-        pictures, pictures,
-      },
-    };
   }
 </script>
 
@@ -29,9 +30,8 @@
   import Search from "$lib/Search.svelte";
 
   export let data;
-  export  let pictures;
-
-  
+  export let pictures;
+  export let user;
 
   let search = "";
 
@@ -57,14 +57,15 @@
       })
     : data;
 
-
- const pic_search = function(x) {
-  for(var i=0; i<pictures.length; i++) {
-	if(pictures[i].name == x) {
-		return true
-	}
-}
- }
+  const pic_search = function (x) {
+    for (var i = 0; i < pictures.length; i++) {
+      if (pictures[i].name == x) {
+       
+        return true;
+      }
+    }
+    return false;
+  };
 
   function picture_of_gen(x, y, z) {
     return `${x}_${y}_${z}.png`;
@@ -115,7 +116,6 @@
   </table>
 </div>
 
-  
 <style>
   table {
     margin-bottom: 25vh;
@@ -142,7 +142,7 @@
   }
   #prog_col {
     width: 25%;
-  }
+  } 
 
   @media only screen and (min-width: 1024px) {
     #skill_col {

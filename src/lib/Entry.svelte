@@ -1,6 +1,7 @@
 <script>
   import Modal from "$lib/Modal.svelte";
   import { download_picture } from "$lib/db_queries.js";
+  import { session } from "$app/stores";
 
   export let vorname;
   export let nachname;
@@ -19,20 +20,21 @@
   let modal_pkg = {
     modal: false,
     modal_title: "",
+    found: null
   };
+
+ 
 
   function upload_pictures() {
     modal_pkg = {
       modal: true,
       modal_title: "Upload Picture",
       picture_of: picture_of,
+      found: found
     };
   }
 
-  
-
   async function download() {
-    
     if (found) {
       try {
         const { data, error } = await download_picture(picture_of);
@@ -52,14 +54,16 @@
     <div id="pic_text_cont">
       <figure class="image is-3by4">
         <img {src} alt="placeholder" use:download />
-        <div class="overlay p-3">
-          <button class="button is-info" on:click={upload_pictures}>
-            <i
-              class="fas fa-upload icon is-medium p-1"
-              id="file_upload"
-            /></button
-          >
-        </div>
+        {#if $session.admin == true}
+          <div class="overlay p-3">
+            <button class="button is-info" on:click={upload_pictures}>
+              <i
+                class="fas fa-upload icon is-medium p-1"
+                id="file_upload"
+              /></button
+            >
+          </div>
+        {/if}
       </figure>
 
       <p class="pt-2 has-text-weight-bold is-size-5-desktop">
@@ -110,7 +114,14 @@
         </span>
       {/each}
       {#if other}
-        <span class="tag">Sonstiges: {other}</span>
+      <article class="message is-light is-small px-2">
+        <div class="message-header has-text-centered">
+          <p class="message-header-text has-text-weight-normal">Sonstiges</p>
+        </div>
+        <div class="message-body py-2">
+          {other}
+        </div>
+      </article>
       {/if}
     </div>
   </td>
@@ -151,6 +162,15 @@
 
   #pic_text_cont {
     margin-left: 1vh;
+  }
+
+  .message-header-text {
+    margin: auto;
+  }
+
+  .message{
+    max-width: 20vh;
+    margin: auto;
   }
 
   /* #mail_p {

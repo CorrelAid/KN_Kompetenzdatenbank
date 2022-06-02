@@ -117,6 +117,14 @@ with check (
      )
 )
 
+create policy p3
+on storage.objects for update
+using (
+  bucket_id = 'pictures'
+  and auth.role() = 'authenticated'
+);
+)
+
 -- -------------------   
 """)
 

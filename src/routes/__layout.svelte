@@ -2,28 +2,46 @@
   import Bulma from "bulma";
   import Header from "$lib/Header.svelte";
   import Footer from "$lib/Footer.svelte";
-  import { session} from "$app/stores";
+  import { session } from "$app/stores";
   import { auth, setAuthCookie, unsetAuthCookie } from "$lib/auth";
+  import { onMount } from "svelte";
+  import { check_admin } from "$lib/db_queries";
 
-  session.subscribe((sessionData) => {console.log(sessionData) }); 
-
-  auth.onAuthStateChange((event, _session) => {
-    if (event !== "SIGNED_OUT") {
-      (async () => {await setAuthCookie(_session)})();
-      session.set({ user: _session.user, authenticated: !!_session.user });
-    } else {
-      session.set({ user: undefined, authenticated: false });
-      (async () => {await unsetAuthCookie(_session)})();
-    }
+  session.subscribe((sessionData) => {
+    console.log(sessionData);
   });
 
-  let admin = true;
+  let check;
+
+    auth.onAuthStateChange((event, _session) => {
+      if (event !== "SIGNED_OUT") {
+        
+
+        (async () => {
+          await setAuthCookie(_session);
+          const check = await check_admin(_session.user)
+          
+          session.set({
+          user: _session.user,
+          authenticated: !!_session.user,
+          admin: check
+        });
+        })();
+
+
+      } else {
+        session.set({ user: undefined, authenticated: false, admin: false });
+        (async () => {
+          await unsetAuthCookie(_session);
+        })();
+      }
+    });
 
 </script>
 
 <svelte:head>
   <meta name="robots" content="noindex" />
-  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="global.css" />
   <script
     src="https://kit.fontawesome.com/a3e38f6c6f.js"
     crossorigin="anonymous"></script>
@@ -33,9 +51,7 @@
 <div class="container">
   <slot />
 </div>
-<Footer logout_visible={$session.authenticated}, admin = {admin}/>
+<Footer />
 
-
-<style global> 
-
+<style global>
 </style>
