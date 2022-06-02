@@ -1,10 +1,8 @@
 <script>
     import { signOut } from "$lib/auth";
     import Modal from "$lib/Modal.svelte";
-
-    export let logout_visible = false;
-    export let admin;
-
+    import { session } from "$app/stores";
+    
     let modal_pkg = {
         modal: false,
         modal_title: "",
@@ -28,17 +26,18 @@
             modal_title: "Send Invitations",
         };
     }
+
 </script>
 
 <footer class="has-background-light columns is-mobile is-vcentered m-0">
-    {#if logout_visible.includes("true")}
+    {#if $session.authenticated == true}
         <div class="column">
             <button class="button block" on:click={handle_signOut}>
                 Sign Out
             </button>
         </div>
     {/if}
-    {#if admin == true && logout_visible.includes("true")}
+    {#if $session.admin == true && $session.authenticated == true}
         <div class="column ">
             <!-- session.authenticated returns string -->
             <button class="button block is-primary m-0 mx-2" on:click={upload_data}>

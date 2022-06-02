@@ -1,0 +1,1 @@
+E-Mail template for the mail supabase sends when someone requests a magic link.

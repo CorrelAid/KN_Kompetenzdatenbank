@@ -1,6 +1,7 @@
 <script>
   import Modal from "$lib/Modal.svelte";
   import { download_picture } from "$lib/db_queries.js";
+  import { session } from "$app/stores";
 
   export let vorname;
   export let nachname;
@@ -13,6 +14,7 @@
   export let other;
   export let found;
   export let picture_of;
+  
 
   let src = "/img/placeholder.png";
 
@@ -52,6 +54,7 @@
     <div id="pic_text_cont">
       <figure class="image is-3by4">
         <img {src} alt="placeholder" use:download />
+        {#if $session.admin == true}
         <div class="overlay p-3">
           <button class="button is-info" on:click={upload_pictures}>
             <i
@@ -60,6 +63,7 @@
             /></button
           >
         </div>
+        {/if}
       </figure>
 
       <p class="pt-2 has-text-weight-bold is-size-5-desktop">

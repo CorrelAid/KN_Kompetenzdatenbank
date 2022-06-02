@@ -2,6 +2,7 @@
 import { auth, getCookie, blankCookies } from '$lib/auth';
 import * as cookie from 'cookie';
 import jwt from 'jsonwebtoken';
+import { check_admin } from '$lib/db_queries.js';
 
 const ExpiryMargin = 1000;
 
@@ -45,6 +46,10 @@ export const handle = async ({ event, resolve }) => {
 		const jwtPayload = cookies.access_token ? jwt.decode(cookies.access_token) : false;
 		event.locals.authenticated = !!jwtPayload;
 		event.locals.user = { email: jwtPayload?.email };
+
+		const check = await check_admin(jwtPayload?.email);
+		
+		event.locals.admin = check;
 	}
 
 	let response = await resolve(event);
@@ -57,10 +62,12 @@ export const handle = async ({ event, resolve }) => {
 };
 
 export async function getSession(request) {
-	
-	const { user, authenticated } = request.locals;
+
+	const { user, authenticated, admin } = request.locals;
+
 	return {
 		user,
 		authenticated,
+		admin
 	};
 }
