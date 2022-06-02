@@ -87,3 +87,16 @@ export const check_admin = async function (x) {
   }
 
 }
+
+export const update_pic = async function(x,y){
+
+  console.log(x)
+  const { data, error } = await supabase
+  .storage
+  .from('pictures')
+  .update(x, y, {
+    contentType: 'image/png',
+    upsert: true
+  })
+}
+

@@ -1,6 +1,6 @@
 <script context="module">
   export async function load({ session }) {
-    if (typeof session.authenticated != "undefined") {
+    if (session.authenticated == true) {
       console.log("ups")
       return {
         status: 302,

@@ -29,7 +29,7 @@ export async function post({ request }) {
     else{
       return{
         status: 403,
-        body: "You are not a participant of this hackathon or typed in an invalid e-mail."
+        body: "You are not a participant of this hackathon or entered an invalid e-mail."
       }
     }
   

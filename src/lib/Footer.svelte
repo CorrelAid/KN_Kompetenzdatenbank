@@ -27,6 +27,13 @@
         };
     }
 
+    function open_imp(){
+        modal_pkg = {
+            modal: true,
+            modal_title: "Impressum",
+        };
+    }
+
 </script>
 
 <footer class="has-background-light columns is-mobile is-vcentered m-0">
@@ -37,9 +44,11 @@
             </button>
         </div>
     {/if}
+    <div class="column has-text-centered">
+        <a href={null} on:click={open_imp}>Impressum</a>
+    </div>
     {#if $session.admin == true && $session.authenticated == true}
         <div class="column ">
-            <!-- session.authenticated returns string -->
             <button class="button block is-primary m-0 mx-2" on:click={upload_data}>
                 Upload data
             </button>
@@ -49,9 +58,7 @@
             </button>
         </div>
     {/if}
-    <div class="column has-text-centered">
-            <h2>Impressum</h2>
-    </div>
+    
 </footer>
 <Modal {...modal_pkg} />
 
@@ -62,6 +69,6 @@
         bottom: 0;
         width: 100%;
         text-align: center;
+        z-index: 1;
     }
-
 </style>

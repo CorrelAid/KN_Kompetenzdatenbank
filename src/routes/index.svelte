@@ -60,9 +60,11 @@
   const pic_search = function (x) {
     for (var i = 0; i < pictures.length; i++) {
       if (pictures[i].name == x) {
+       
         return true;
       }
     }
+    return false;
   };
 
   function picture_of_gen(x, y, z) {
@@ -140,7 +142,7 @@
   }
   #prog_col {
     width: 25%;
-  }
+  } 
 
   @media only screen and (min-width: 1024px) {
     #skill_col {
