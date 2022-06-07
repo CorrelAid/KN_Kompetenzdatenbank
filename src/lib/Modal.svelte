@@ -2,7 +2,6 @@
   import UploadData from "$lib/Upload_Data.svelte";
   import UploadPicture from "$lib/Upload_Picture.svelte";
   import SendInvitations from "$lib/Send_Invitations.svelte";
-  import Impressum from "$lib/Impressum.svelte";
   import {
     insert_data,
     upload_picture,
@@ -118,9 +117,6 @@
         <!-- INVITATIONS -->
       {:else if modal_title === "Send Invitations"}
         <SendInvitations {message} on:message={handle_invitation_message} />
-        <!-- IMPRESSUM -->
-      {:else if modal_title === "Impressum"}
-        <Impressum />
       {/if}
     </section>
     <footer class="modal-card-foot">
@@ -149,6 +145,7 @@
   #modal-card {
     position: fixed;
     z-index: 2;
+    width: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

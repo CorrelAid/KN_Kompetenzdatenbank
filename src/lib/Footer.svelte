@@ -27,12 +27,6 @@
         };
     }
 
-    function open_imp(){
-        modal_pkg = {
-            modal: true,
-            modal_title: "Impressum",
-        };
-    }
 
 </script>
 
@@ -45,7 +39,7 @@
         </div>
     {/if}
     <div class="column has-text-centered">
-        <a href={null} on:click={open_imp}>Impressum</a>
+        <a href="/impressum">Impressum</a>
     </div>
     {#if $session.admin == true && $session.authenticated == true}
         <div class="column ">

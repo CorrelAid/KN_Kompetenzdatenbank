@@ -73,11 +73,11 @@
       </p>
       <p class="pb-1 has-text-weight-medium">{job}</p>
     </div>
-    <a class="icon-text has-text-link" href="mailto:{email}">
+    <a class="icon-text has-text-link is-hidden-desktop" href="mailto:{email}">
       <span class="icon has-text-info">
         <i class="fas fa-envelope pl-2"></i>
       </span>
-      <span>Contact</span>
+      <span>Kontakt</span>
     </a>
   </td>
   <td>
@@ -114,7 +114,7 @@
         </span>
       {/each}
       {#if other}
-      <article class="message is-light is-small px-2">
+      <article class="message is-light is-small px-2 pt-1">
         <div class="message-header has-text-centered">
           <p class="message-header-text has-text-weight-normal">Sonstiges</p>
         </div>
