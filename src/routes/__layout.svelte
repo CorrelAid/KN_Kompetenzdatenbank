@@ -53,5 +53,3 @@
 </div>
 <Footer />
 
-<style global>
-</style>

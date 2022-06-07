@@ -48,7 +48,7 @@
   </p>
 
   <form 
-    class="control has-icons-left has-icons-right mb-3 px-2"
+    class="control has-icons-left has-icons-right my-3 px-2  "
     on:submit|preventDefault={handleLogin}
   >
     <input class="input is-medium" placeholder="Email" bind:value={email} />
