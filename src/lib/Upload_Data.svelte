@@ -34,7 +34,10 @@
     }
 </script>
 
-<div class="file has-name is-boxed">
+<p class="pb-0">You can only upload <strong>csv</strong> files that match the format of the registration data.</p>
+<p class="pt-2 pb-2"> If there is already data in the database, <strong>it will be deleted</strong> and replaced with the uploaded data. Pictures will be deleted as well.</p>
+<div class="file has-name is-boxed pt-2">
+    
     <label class="file-label" id="file_cont">
         <input
             class="file-input"

@@ -11,7 +11,6 @@
     if (session.authenticated == true) {
       return {
         props: {
-          user: session.user,
           data: data,
           pictures: pictures,
         },
@@ -30,8 +29,7 @@
   import Search from "$lib/Search.svelte";
 
   export let data;
-  export let pictures;
-  export let user;
+  export let pictures = [];
 
   let search = "";
 
@@ -59,8 +57,9 @@
 
   const pic_search = function (x) {
     for (var i = 0; i < pictures.length; i++) {
-      if (pictures[i].name == x) {
-       
+    
+      if (pictures[i].name.includes(x)) {
+
         return true;
       }
     }
@@ -68,7 +67,7 @@
   };
 
   function picture_of_gen(x, y, z) {
-    return `${x}_${y}_${z}.png`;
+    return `${x}_${y}_${z}`;
   }
 </script>
 

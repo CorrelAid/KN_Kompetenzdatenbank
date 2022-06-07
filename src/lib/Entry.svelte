@@ -1,6 +1,6 @@
 <script>
   import Modal from "$lib/Modal.svelte";
-  import { download_picture } from "$lib/db_queries.js";
+  import { download_picture} from "$lib/db_queries.js";
   import { session } from "$app/stores";
 
   export let vorname;
@@ -15,6 +15,8 @@
   export let found;
   export let picture_of;
 
+
+
   let src = "/img/placeholder.png";
 
   let modal_pkg = {
@@ -23,7 +25,6 @@
     found: null
   };
 
- 
 
   function upload_pictures() {
     modal_pkg = {
@@ -44,7 +45,7 @@
         console.error("Error downloading image: ", error.message);
       }
     } else {
-      src = "/img/placeholder.png";
+      src =  "/img/placeholder.png";
     }
   }
 </script>
@@ -133,7 +134,7 @@
   <td />
 </tr>
 
-<Modal {...modal_pkg} />
+<Modal {...modal_pkg}/>
 
 <style>
   /* The overlay effect - lays on top of the container and over the image */
