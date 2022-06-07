@@ -1,4 +1,4 @@
-//hooks.js
+//authentication code was taken or inspired by https://github.com/supabase/supabase/discussions/5218
 import { auth, getCookie, blankCookies } from '$lib/auth';
 import * as cookie from 'cookie';
 import jwt from 'jsonwebtoken';
