@@ -37,7 +37,6 @@ const to_list_ds = function (x) {
 }
 
 const to_list = function (x){
-    console.log(x)
     if (x === " " || x === ""){
         return []
     }

@@ -54,7 +54,7 @@
             </button>
 
             <button class="button block is-primary m-0 mx-2" on:click={send_invitations}>
-                Send invitations
+                Send Invitations
             </button>
         </div>
     {/if}

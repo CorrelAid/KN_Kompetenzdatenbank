@@ -1,7 +1,6 @@
 <script context="module">
   export async function load({ session }) {
     if (session.authenticated == true) {
-      console.log("ups")
       return {
         status: 302,
         redirect: "/",

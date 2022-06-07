@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte';
 
 
-    let message;
+    export let message;
     let file_name;
     let uploader;
 
@@ -39,7 +39,8 @@
 
     
 </script>
-
+<p class="pb-0">You can only upload <strong>png</strong> files.</p>
+<p class="pt-2 pb-2"> If there is already a picture in the database, the old picture will be <strong>deleted</strong> and replaced with the new picture.</p>
 <div class="file has-name is-boxed">
     <label class="file-label" id="file_cont">
         <input

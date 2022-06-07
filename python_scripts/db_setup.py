@@ -96,6 +96,24 @@ create policy "Only authenticated admins can insert data"
       select get_admins()
     )
   )
+  
+  create policy "Only authenticated admins can delete data"
+  on main
+  for delete with check (
+    auth.uid() in (
+      select get_admins()
+    )
+  )
+  
+create or replace function delete_all() returns VOID as $$
+  truncate main
+$$ language sql;
+
+create policy list_all_buckets
+on storage.buckets for select using (
+true
+);
+
 -- STORAGE -------------------
 insert into storage.buckets (id, name)
 values ('pictures', 'pictures');
@@ -123,7 +141,14 @@ using (
   bucket_id = 'pictures'
   and auth.role() = 'authenticated'
 );
-)
+
+create policy p4
+on storage.objects for delete
+using (
+  bucket_id = 'pictures'
+  and auth.role() = 'authenticated'
+);
+
 
 -- -------------------   
 """)
