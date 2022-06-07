@@ -67,12 +67,18 @@
         {/if}
       </figure>
 
-      <p class="pt-2 has-text-weight-bold is-size-5-desktop">
+      <p class="pt-2 has-text-weight-bold is-size-5-desktop is-hidden-mobile">
         {vorname}
         {nachname}
       </p>
       <p class="pb-1 has-text-weight-medium">{job}</p>
     </div>
+    <a class="icon-text has-text-link" href="mailto:{email}">
+      <span class="icon has-text-info">
+        <i class="fas fa-envelope pl-2"></i>
+      </span>
+      <span>Contact</span>
+    </a>
   </td>
   <td>
     <div class="icon_cont">
@@ -87,14 +93,7 @@
           </span>
         {/each}
       </div>
-      <!-- <div id="email-cont" class="is-hidden-desktop">
-        <p class="has-text-weight-bold pt-5" id="mail_p">
-          Kontakt:
-        </p>
-        <p  id="mail_p">
-          {email}
-        </p>
-      </div> -->
+     
     </div>
   </td>
   <td>

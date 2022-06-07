@@ -5,3 +5,7 @@ App to use during hackathons. Serves the purpose of providing an overview of par
 [WIP URL](https://kompetenzdatenbank.onrender.com/) 
 
 
+## Todo
+
+- add logos
+- optimize design
