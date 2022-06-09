@@ -49,12 +49,17 @@ export async function post({ request }) {
     }
 
     for (let i = 0; i < not_reg.length; i++) {
-        const { error, user } = await invite(not_reg[i])
-        if (error) {
-            return {
-                status: error.status,
-                body:  `${not_reg[i]} failed because: ${error.status}`
-            }
+        try{
+            const { error, user } = await invite(not_reg[i])
+        }
+       catch{
+           console.log(not_reg[i], error)
+       }
+        // if (error) {
+        //     return {
+        //         status: error.status,
+        //         body:  `${not_reg[i]} failed because: ${error.status}`
+        //     }
         }
     }
 
