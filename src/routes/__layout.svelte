@@ -41,6 +41,7 @@
 
 <svelte:head>
   <meta name="robots" content="noindex" />
+  <title>Kompetenzdatenbank</title>
   <link rel="stylesheet" href="global.css" />
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script
