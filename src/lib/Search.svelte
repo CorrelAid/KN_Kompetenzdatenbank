@@ -32,6 +32,6 @@
 </nav>
 <style>
 .title{
-    font-family: 'Roboto';
+    font-family: 'Roboto' "serif";
   }
 </style>
