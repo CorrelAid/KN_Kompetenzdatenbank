@@ -42,6 +42,7 @@
 <svelte:head>
   <meta name="robots" content="noindex" />
   <link rel="stylesheet" href="global.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script
     src="https://kit.fontawesome.com/a3e38f6c6f.js"
     crossorigin="anonymous"></script>

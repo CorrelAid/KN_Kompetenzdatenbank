@@ -29,7 +29,7 @@
             message = "Above the max file size threshold.";
             return;
         }
-        if (fileExtension.includes("png") && file.size < maxFileSize) {
+        if (fileExtension.includes("jpeg") && file.size < maxFileSize) {
             send_file(file)
         } else {
             message = "Not an allowed file type.";

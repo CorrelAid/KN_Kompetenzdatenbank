@@ -29,7 +29,7 @@ export async function post({ request }) {
   else {
     return {
       status: 403,
-      body: "You are not a participant of this hackathon or entered an invalid e-mail."
+      body: "Du bist keine Teilnehmer:in dieses Hackathons oder die eingebene E-Mail ist ungültig"
     }
   }
 

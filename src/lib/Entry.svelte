@@ -73,9 +73,9 @@
       </p>
       <p class="pb-1 has-text-weight-medium">{job}</p>
     </div>
-    <a class="icon-text has-text-link is-hidden-desktop" href="mailto:{email}">
-      <span class="icon has-text-info">
-        <i class="fas fa-envelope pl-2"></i>
+    <a class="icon-text has-text-link is-hidden-desktop  pl-2" href="mailto:{email}">
+      <span class="icon has-text-info ">
+        <i class="fas fa-envelope "></i>
       </span>
       <span>Kontakt</span>
     </a>

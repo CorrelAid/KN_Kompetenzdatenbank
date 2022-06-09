@@ -39,7 +39,7 @@
 </script>
 
 
-  <p class="is-size-5 mb-3 px-2">
+  <p class="is-size-5 mb-3 px-2 pt-4">
     Du kannst auf die Kompetenzdatenbank mit einem Link zugreifen, den wir dir
     per E-Mail geschickt haben.
   </p>

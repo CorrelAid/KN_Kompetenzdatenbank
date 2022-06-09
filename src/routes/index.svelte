@@ -78,7 +78,6 @@
     <thead>
       <tr>
         <th class="" id="pic_col">
-          <!-- <span class="icon"> <i class="fa-solid fa-user" /></span> -->
         </th>
         <th id="prog_col">
           <h3 class="has-text-weight-semibold has-text-centered p-2">
@@ -117,7 +116,7 @@
 
 <style>
   table {
-    margin-bottom: 25vh;
+    margin-bottom: 35vh;
     border-collapse: collapse;
     width: 100%;
   }
