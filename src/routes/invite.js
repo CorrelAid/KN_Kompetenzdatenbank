@@ -16,10 +16,10 @@ async function invite(x) {
         .api
         .inviteUserByEmail(x)
 
-    return {user, error}
+    return { user, error }
 }
 
-async function get_users(){
+async function get_users() {
     const { data: user, error } = await supabase.auth.api.listUsers()
 
     return user
@@ -43,31 +43,31 @@ export async function post({ request }) {
                 check = true;
             }
         }
-        if (check === false){
+        if (check === false) {
             not_reg.push(emails[i].email)
         }
     }
 
     for (let i = 0; i < not_reg.length; i++) {
-        try{
+        try {
             const { error, user } = await invite(not_reg[i])
         }
-       catch{
-           console.log(not_reg[i], error)
-       }
+        catch {
+            console.log(not_reg[i], error)
+        }
         // if (error) {
         //     return {
         //         status: error.status,
         //         body:  `${not_reg[i]} failed because: ${error.status}`
         //     }
-        }
     }
 
-    return {
-        status: 200,
-        body: 'success',
-  
-      }
+
+return {
+    status: 200,
+    body: 'success',
+
+}
 
 
 }
