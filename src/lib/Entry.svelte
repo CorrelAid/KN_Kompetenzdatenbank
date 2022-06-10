@@ -67,7 +67,7 @@
         {/if}
       </figure>
 
-      <p class="pt-2 has-text-weight-bold is-size-5-desktop is-hidden-mobile">
+      <p class="pt-2 has-text-weight-bold is-size-5-desktop">
         {vorname}
         {nachname}
       </p>

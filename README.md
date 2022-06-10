@@ -19,4 +19,5 @@ App to use during hackathons. Serves the purpose of providing an overview of par
 - handle weird writing of programming languae "C / C++"
 - add more error handling
 - add feature to delete/add/change entry
-- add favicon
+- fix footer blocking the text input on mobile
+- fix picture

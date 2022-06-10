@@ -116,7 +116,7 @@
 
 <style>
   table {
-    margin-bottom: 35vh;
+    margin-bottom: 50vh;
     border-collapse: collapse;
     width: 100%;
   }
