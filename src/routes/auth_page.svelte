@@ -38,15 +38,6 @@
   };
 </script>
 
-
-  <p class="is-size-5 mb-3 px-2 pt-4">
-    Du kannst auf die Kompetenzdatenbank mit einem Link zugreifen, den wir dir
-    per E-Mail geschickt haben.
-  </p>
-  <p class="px-2">
-    Wenn du einen neuen Link zugesendet haben willst, gib hier deine E-Mail an:
-  </p>
-
   <form 
     class="control has-icons-left has-icons-right my-3 px-2  "
     on:submit|preventDefault={handleLogin}
@@ -64,6 +55,14 @@
       disabled={loading}
     />
   </form>
+
+  <p class="is-size-4 is-size-5-mobile px-2 pb-2">
+    Du kannst auf die Kompetenzdatenbank mit einem Link zugreifen, den wir dir
+    per E-Mail geschickt haben.
+  </p>
+  <p class="px-2 is-size-5 is-size-6-mobile">
+    Wenn du einen neuen Link zugesendet haben willst, gib oben deine Mail an.
+  </p>
 
   <div
     class="notification is-info"

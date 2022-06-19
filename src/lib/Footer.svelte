@@ -2,7 +2,7 @@
     import { signOut } from "$lib/auth";
     import Modal from "$lib/Modal.svelte";
     import { session } from "$app/stores";
-    
+
     let modal_pkg = {
         modal: false,
         modal_title: "",
@@ -26,11 +26,11 @@
             modal_title: "Send Invitations",
         };
     }
-
-
 </script>
 
-<footer class="has-background-light columns is-mobile is-vcentered m-0">
+<footer
+    class="has-background-light columns is-mobile is-vcentered m-0"
+>
     {#if $session.authenticated == true}
         <div class="column">
             <button class="button block" on:click={handle_signOut}>
@@ -43,26 +43,34 @@
     </div>
     {#if $session.admin == true && $session.authenticated == true}
         <div class="column ">
-            <button class="button block is-primary m-0 mx-2" on:click={upload_data}>
+            <button
+                class="button block is-primary m-0 mx-2"
+                on:click={upload_data}
+            >
                 Upload data
             </button>
 
-            <button class="button block is-primary m-0 mx-2" on:click={send_invitations}>
+            <button
+                class="button block is-primary m-0 mx-2"
+                on:click={send_invitations}
+            >
                 Send Invitations
             </button>
         </div>
     {/if}
-    
 </footer>
 <Modal {...modal_pkg} />
 
 <style>
+     
     footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
         width: 100%;
         text-align: center;
-        z-index: 1;
+        z-index: 100;
+        position: fixed;
+            bottom: 0;
+            left: 0;
+        
     }
+
 </style>
