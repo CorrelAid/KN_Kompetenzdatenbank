@@ -20,4 +20,5 @@ App to use during hackathons. Serves the purpose of providing an overview of par
 - add more error handling
 - add feature to delete/add/change entry
 - add feature that allows admins to confirm participants
+- deal with https://supabase.com/docs/guides/platform/permissions
 
