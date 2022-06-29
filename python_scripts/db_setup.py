@@ -19,11 +19,11 @@ conn = psycopg2.connect(user="postgres", password=db_pw, host=db_host, port="543
 cur = conn.cursor()
 cur.execute("""
 -- ADMINS -------------------
-CREATE TABLE public.admin_emails(
+CREATE TABLE IF NOT EXISTS public.admin_emails(
     email varchar(254) NOT NULL PRIMARY KEY UNIQUE
 );
 
-CREATE TABLE public.auth_roles(
+CREATE TABLE IF NOT EXISTS public.auth_roles(
     email varchar(254) NOT NULL PRIMARY KEY UNIQUE,
     admin boolean NOT NULL,
     id uuid references auth.users
@@ -44,9 +44,6 @@ begin
 end;
 $$ language plpgsql security definer;
 
-DROP TRIGGER IF EXISTS on_auth_user_created
-ON auth.users;
-
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
@@ -60,11 +57,9 @@ CREATE TABLE IF NOT EXISTS main(
     vorname varchar(100),
     nachname varchar(100),
     job varchar(100),
-    programming text,
-    datascience text,
-    webdev text,
-    math text,
-    other text
+    attendance text,
+    skills text,
+    confirmed boolean NOT NULL
 );
 
 alter table main
@@ -95,15 +90,15 @@ create policy "Only authenticated admins can insert data"
     auth.uid() in (
       select get_admins()
     )
-  )
+  );
   
   create policy "Only authenticated admins can delete data"
   on main
-  for delete with check (
+  for delete using (
     auth.uid() in (
       select get_admins()
     )
-  )
+  );
   
 create or replace function delete_all() returns VOID as $$
   truncate main
@@ -133,7 +128,7 @@ with check (
      auth.uid() in (
        select get_admins()
      )
-)
+);
 
 create policy p3
 on storage.objects for update
@@ -147,10 +142,8 @@ on storage.objects for delete
 using (
   bucket_id = 'pictures'
   and auth.role() = 'authenticated'
-);
+)
 
-
--- -------------------   
 """)
 
 conn.commit()
