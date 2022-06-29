@@ -55,7 +55,7 @@
         location.reload();
       }
       catch(ex){
-        message= ex
+        message=ex
         loading = false;
       }  
       //

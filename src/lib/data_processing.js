@@ -60,7 +60,7 @@ const to_list = function (x) {
 const handle_skills = function (skills_cats, cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9) {
     let obj = {};
     if (skills_cats.includes("Marketing & Kommunikation")) {
-        obj.cat_1 = cat_1
+        obj.cat_1 = cat_1.split(",")
     }
     else if (skills_cats.includes("Concepting")) {
         obj.cat_2 = cat_2
@@ -68,41 +68,43 @@ const handle_skills = function (skills_cats, cat_1, cat_2, cat_3, cat_4, cat_5, 
     return obj;
 }
 
-const handle_attendance = function(x){
-    if (x.includes("aktiv als Teilnehmer*in beim Hackathon dabei")){
-        return("Aktive Teilnehmer*in")
+const handle_attendance = function (y) {
+    if (y.includes("aktiv als Teilnehmer*in beim Hackathon dabei")) {
+        return ("Aktive Teilnehmer*in")
     }
-    else if (x.includes("Mentor")){
-        return("Mentor*in")
+    else if (y.includes("Mentor") & !y.includes("Coach")) {
+        return ("Mentor*in")
     }
-    else{return(x)}
+    else { return (y) }
 }
 
 
 
 export const transform_array = function (x) {
     const y = x.slice(1, (x.length - 1)).map(object => {
-        return {
-            email: check_null(object[1]),
-            f_name: check_null(object[2]),
-            l_name: check_null(object[3]),
-            job: check_null(object[5]),
-            attendance: handle_attendance(object[6]),
-            skills: handle_skills(object[9], object[10], object[11], object[12], object[13], object[14], object[15], object[16], object[17], object[18]),
-            confirmed: false
+        if (object) {
+            return {
+                email: check_null(object[1]),
+                f_name: check_null(object[2]),
+                l_name: check_null(object[3]),
+                job: check_null(object[5]),
+                attendance: handle_attendance(check_null(object[6])),
+                // skills: handle_skills(object[9], object[10], object[11], object[12], object[13], object[14], object[15], object[16], object[17], object[18]),
+                confirmed: false
+            }
         }
     });
 
-    function filterByAttendance(obj) {
-        if (obj.attendance.includes("Aktive Teilnehmer*in") || obj.attendance.includes("Mentor*in")) {
-          console.log(obj)
-          return true;
-        }
-        return false;
-      }
-      let data = y;
-      data = data.filter(filterByAttendance);
-      console.log(data)
+    // only allowing active participants to be displayed on website
+    // function filterByAttendance(obj) {
+    //     if (obj.attendance.includes("Aktive Teilnehmer*in") || obj.attendance.includes("Mentor*in")) {
+    //       console.log(obj)
+    //       return true;
+    //     }
+    //     return false;
+    //   }
+    let data = y;
+    //   data = data.filter(filterByAttendance);
     return data;
 }
 

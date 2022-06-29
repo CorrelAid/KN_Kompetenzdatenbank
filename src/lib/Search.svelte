@@ -1,8 +1,6 @@
 <script>
 	export let value;
 	export let number_entries;
-
-	$: number_entries = number_entries
 </script>
 
 <nav class="level container">

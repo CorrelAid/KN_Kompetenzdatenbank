@@ -14,6 +14,9 @@ export const get_data = async function () {
   const { data, error } = await supabase
     .from('main')
     .select()
+    if (error){
+      throw new Error("error getting data:" + JSON.stringify(error));
+    }
   return data
 }
 
@@ -122,6 +125,9 @@ export const get_pictures = async function () {
       offset: 0,
       sortBy: { column: 'name', order: 'asc' }
     })
+    if (error){
+      throw new Error("error getting pictures:" + JSON.stringify(error));
+    }
   return data
 }
 

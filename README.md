@@ -57,6 +57,9 @@ npm run dev
 
 ### 1. Add data
 
+## Ideal procedure during hackathon
+
+You can use this app to check if someone is registered and then confirm their entry in the database. Because there are different types of attendance, ask people if they plan to actively participate. Only then would it make sense for them to show up in the database probably.
 
 ## Deploy 
 
@@ -75,10 +78,30 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 ## Todo
 
 - Invitation email template
-- handle weird writing of programming languae "C / C++"
 - add more error handling
 - add feature to delete/add/change entry
 - add feature that allows admins to confirm participants
+- fix:
+```
+node:internal/errors:465
+    ErrorCaptureStackTrace(err);
+    ^
+
+TypeError [ERR_INVALID_URL]: Invalid URL
+    at new NodeError (node:internal/errors:372:5)
+    at URL.onParseError (node:internal/url:553:9)
+    at new URL (node:internal/url:629:5)
+    at new Request (file:///home/jstet/Gits/CorrelAid/Kompetenzdatenbank/node_modules/@sveltejs/kit/dist/install-fetch.js:5907:16)
+    at file:///home/jstet/Gits/CorrelAid/Kompetenzdatenbank/node_modules/@sveltejs/kit/dist/install-fetch.js:6189:19
+    at new Promise (<anonymous>)
+    at fetch (file:///home/jstet/Gits/CorrelAid/Kompetenzdatenbank/node_modules/@sveltejs/kit/dist/install-fetch.js:6187:9)
+    at setServerSession (/src/lib/auth.js:44:8)
+    at Module.setAuthCookie (/src/lib/auth.js:53:8)
+    at eval (/src/routes/__layout.svelte:32:33) {
+  input: '/auth',
+  code: 'ERR_INVALID_URL'
+}
+```
 
 
 ## Long term development goals
