@@ -76,7 +76,7 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
-
+- Teilnehmer*in/Mentor*in Filter
 - Invitation email template
 - add more error handling
 - add feature to delete/add/change entry
@@ -102,6 +102,7 @@ TypeError [ERR_INVALID_URL]: Invalid URL
   code: 'ERR_INVALID_URL'
 }
 ```
+- Fix long loading times when loading table row components (Entries). I have no idea why that happens. I had to switch search functionalities to vanilla js because of that.
 
 
 ## Long term development goals

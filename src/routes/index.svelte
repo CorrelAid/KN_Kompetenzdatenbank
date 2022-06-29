@@ -39,29 +39,54 @@
   let search = "";
   let message;
 
-  let visibleEntries = [];
+  function flt() {
+    // Declare variables
+    var tbody, tr, name, nameval, skill, skillval, i, index;
 
+    tbody = document.getElementsByTagName("tbody")[0];
+    tr = tbody.getElementsByTagName("tr");
 
-  $: visibleEntries = search
-    ? data.filter((row) => {
-        var pattern = RegExp(search, "gi");
-        return (
-          row.f_name.match(pattern) ||
-          row.l_name.match(pattern) ||
-          row.attendance.match(pattern)
-          // row.programming.match(pattern) ||
-          // row.datascience.match(pattern) ||
-          // row.webdev.match(pattern) ||
-          // row.math.match(pattern) ||
-          // row.other.match(pattern)
-          // row.skills.find((element) => {
-          // 	if (element.includes(search)) {
-          // 		return true;
-          // 	}
-          // })
-        );
-      })
-    : data;
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      name = tr[i].getElementsByClassName("name")[0];
+      nameval = (name.textContent || name.innerText).toLowerCase();
+
+      skill = tr[i].getElementsByClassName("skill");
+      skill = Array.prototype.slice.call(skill);
+      skill = skill.map((obj) => {
+        return obj.textContent || obj.innerText;
+      });
+
+      let found = false;
+
+      for (index = 0; index < skill.length; index++) {
+        if (skill[index].toLowerCase().includes(search.toLowerCase())) {
+          found = true;
+        }
+      }
+
+      if (nameval.indexOf(search.toLowerCase()) > -1 || found === true) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+
+  function flt_radio(x) {
+    // var tbody, tr, attendance, attval, i;
+    // tbody = document.getElementsByTagName("tbody")[0];
+    // tr = tbody.getElementsByTagName("tr");
+    // for (i = 0; i < tr.length; i++) {
+    //   attendance = tr[i].getElementsByClassName("attendance")[0];
+    //   attval = (attendance.textContent || attendance.innerText).toLowerCase();
+    //   if (attval.indexOf(x)) {
+    //     tr[i].style.display = "";
+    //   } else {
+    //     tr[i].style.display = "none";
+    //   }
+    // }
+  }
 
   const pic_search = function (x) {
     for (var i = 0; i < pictures.length; i++) {
@@ -82,7 +107,7 @@
     <div class="loader is-loading" />
   </div>
 {:else if loaded === true}
-  <Search number_entries={visibleEntries.length} bind:value={search} />
+  <Search number_entries={data.length} {flt_radio} {flt} bind:value={search} />
   {#if message}
     <p class="has-text-danger mt-4">{message}</p>
   {/if}
@@ -95,7 +120,9 @@
           <th class="" id="pic_col" />
           <!-- attendance col -->
           <th id="attendance_col">
-            <h3 class="has-text-weight-semibold has-text-centered p-2">
+            <h3
+              class="has-text-weight-semibold has-text-centered p-2 is-hidden-mobile"
+            >
               Art der Teilnahme
             </h3>
           </th>
@@ -106,22 +133,23 @@
             </h3>
           </th>
           <!-- email col -->
-          <th class="is-hidden-mobile has-text-centered">
+          <th class="is-hidden-mobile has-text-centered" id="email_col">
             <h3 class="has-text-weight-semibold  p-2">Kontakt</h3>
           </th>
         </tr>
       </thead>
       <tbody>
-        {#each visibleEntries as row}
+        {#each data as row (row.id)}
           <Entry
             f_name={row.f_name}
             l_name={row.l_name}
             email={row.email}
             job={row.job}
             attendance={row.attendance}
-            skills={row.skills}
+            skills={JSON.parse(row.skills)}
             picture_of={picture_of_gen(row.id)}
             found={pic_search(picture_of_gen(row.id))}
+            id={row.id}
           />
         {/each}
       </tbody>
@@ -153,13 +181,32 @@
   #pic_col {
     width: 15%;
   }
-  #prog_col {
+  #attendance_col {
     width: 25%;
   }
 
-  @media only screen and (min-width: 1024px) {
+  #skill_col {
+    width: 35%;
+  }
+
+  #email_col {
+    width: 25%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    #pic_col {
+      width: 15%;
+    }
+    #attendance_col {
+      width: 15%;
+    }
+
     #skill_col {
-      width: 25%;
+      width: auto;
+    }
+
+    #email_col {
+      width: 0%;
     }
   }
 

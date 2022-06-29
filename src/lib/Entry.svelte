@@ -11,6 +11,7 @@
   export let skills;
   export let found;
   export let picture_of;
+  export let id;
 
   let src = "/img/placeholder.png";
 
@@ -44,7 +45,7 @@
   }
 </script>
 
-<tr>
+<tr {id}>
   <!-- Pic and name col -->
   <td class="pic_td">
     <div id="pic_text_cont">
@@ -62,25 +63,28 @@
         {/if}
       </figure>
 
-      <p class="pt-2 has-text-weight-bold is-size-5-desktop">
+      <p class="pt-2 has-text-weight-bold is-size-5-desktop name">
         {f_name}
         {l_name}
       </p>
-      <p class="pb-1 has-text-weight-medium">{job}</p>
+      <p class="has-text-weight-medium">{job}</p>
     </div>
     <a
-      class="icon-text has-text-link is-hidden-desktop  pl-2 "
+      class="icon-text has-text-link is-hidden-tablet p-2"
       href="mailto:{email}"
     >
-      <span class="icon has-text-info ">
+      <span class="icon has-text-info">
         <i class="fas fa-envelope " />
       </span>
       <span>Kontakt</span>
     </a>
+    <p class="pl-2 is-hidden-tablet">
+      {attendance}
+    </p>
   </td>
   <!-- attendance col -->
-  <td class="is-hidden-mobile has-text-centered">
-    <p class="p-2">
+  <td class="has-text-centered is-hidden-mobile">
+    <p class="p-2 attendance">
       {attendance}
     </p>
   </td>
@@ -88,43 +92,16 @@
   <td>
     <div class="icon_cont">
       <div class="is-flex-direction-row">
-        <!-- {#each JSON.parse(skills) as skill} -->
-        <span class="tag m-1">
-          {skills}
-        </span>
-        <!-- {/each} -->
+        {#each skills as skill}
+          {#if skill != ""}
+            <span class="tag m-1 skill">
+              {skill}
+            </span>
+          {/if}
+        {/each}
       </div>
     </div>
   </td>
-  <!-- <td> -->
-  <!-- <div class="is-flex-direction-row has-text-centered">
-      {#each JSON.parse(datascience) as item}
-        <span class="tag m-1">
-          {item}
-        </span>
-      {/each}
-      {#each JSON.parse(webdev) as item}
-        <span class="tag m-1">
-          {item}
-        </span>
-      {/each}
-      {#each JSON.parse(math) as item}
-        <span class="tag m-1">
-          {item}
-        </span>
-      {/each}
-      {#if other}
-      <article class="message is-light is-small px-2 pt-1">
-        <div class="message-header has-text-centered">
-          <p class="message-header-text has-text-weight-normal">Sonstiges</p>
-        </div>
-        <div class="message-body py-2">
-          {other}
-        </div>
-      </article>
-      {/if}
-    </div> -->
-  <!-- </td> -->
   <!-- email col -->
   <td class="is-hidden-mobile has-text-centered">
     <p class="p-2">
@@ -172,10 +149,10 @@
   .message {
     max-width: 20vh;
     margin: auto;
-  }
+  } 
 
   /* #mail_p {
     font-size: 1.3vh;
     word-wrap: break-word;
-  } */
+  }
 </style>
