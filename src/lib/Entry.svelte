@@ -78,7 +78,7 @@
       </span>
       <span>Kontakt</span>
     </a>
-    <p class="pl-2 is-hidden-tablet">
+    <p class="pl-2 is-hidden-tablet attendance">
       {attendance}
     </p>
   </td>

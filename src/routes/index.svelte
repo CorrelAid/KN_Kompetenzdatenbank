@@ -41,7 +41,7 @@
 
   function flt() {
     // Declare variables
-    var tbody, tr, name, nameval, skill, skillval, i, index;
+    var tbody, tr, name, nameval, skill, att, attval, i, index;
 
     tbody = document.getElementsByTagName("tbody")[0];
     tr = tbody.getElementsByTagName("tr");
@@ -50,6 +50,9 @@
     for (i = 0; i < tr.length; i++) {
       name = tr[i].getElementsByClassName("name")[0];
       nameval = (name.textContent || name.innerText).toLowerCase();
+
+      att= tr[i].getElementsByClassName("attendance")[0];
+      attval = (att.textContent || att.innerText).toLowerCase();
 
       skill = tr[i].getElementsByClassName("skill");
       skill = Array.prototype.slice.call(skill);
@@ -65,7 +68,7 @@
         }
       }
 
-      if (nameval.indexOf(search.toLowerCase()) > -1 || found === true) {
+      if (nameval.indexOf(search.toLowerCase()) > -1 || found === true || attval.indexOf(search.toLowerCase()) > -1) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
