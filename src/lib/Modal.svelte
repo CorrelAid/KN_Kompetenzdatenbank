@@ -46,12 +46,18 @@
     // DATA
     if (modal_title === "Upload Data" && data) {
       loading = true;
-      data = transform_array(data);
-      await delete_everything();
-      await insert_data(data);
-      loading = false;
-      modal = false;
-      location.reload();
+      try{
+        data = transform_array(data);
+        await delete_everything();
+        await insert_data(data);
+        loading = false;
+        modal = false;
+        location.reload();
+      }
+      catch(ex){
+        message= ex
+        loading = false;
+      }  
       //
       // PICTURES
     } else if (modal_title === "Upload Picture") {
@@ -110,7 +116,7 @@
     <section class="modal-card-body has-text-centered">
       <!-- DATA -->
       {#if modal_title === "Upload Data"}
-        <UploadData {onDataUpload} />
+        <UploadData message={message}, onDataUpload={onDataUpload} />
         <!-- PICTURES -->
       {:else if modal_title === "Upload Picture"}
         <UploadPicture {message} on:message={handle_picture_message} />

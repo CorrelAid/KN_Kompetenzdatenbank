@@ -3,7 +3,7 @@
 
     export let onDataUpload;
 
-    let message;
+    export let message;
     let file_name;
     let uploader;
     let maxFileSize = 3145728;

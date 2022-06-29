@@ -5,6 +5,9 @@ export const insert_data = async function (x) {
   const { data, error } = await supabase
     .from('main')
     .insert(x)
+    if (error){
+      throw new Error("Insert Data into db failed:" + JSON.stringify(error));
+    }
 }
 
 export const get_data = async function () {
@@ -16,6 +19,10 @@ export const get_data = async function () {
 
 async function delete_rows() {
   const { data, error } = await supabase.rpc('delete_all')
+  if (error){
+    throw new Error("row deletion failed:" + JSON.stringify(error));
+  }
+  
 }
 
 export const delete_everything = async function () {
@@ -78,7 +85,9 @@ async function delete_pictures() {
   const { data, error } = await supabase
     .storage
     .emptyBucket('pictures')
-
+    if (error){
+      throw new Error("picture failed:" + JSON.stringify(error));
+    }
 }
 
 export function gen_file_name(x) {

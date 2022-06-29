@@ -39,14 +39,15 @@
     ? data.filter((row) => {
         var pattern = RegExp(search, "gi");
         return (
-          row.vorname.match(pattern) ||
-          row.nachname.match(pattern) ||
-          row.programming.match(pattern) ||
-          row.datascience.match(pattern) ||
-          row.webdev.match(pattern) ||
-          row.math.match(pattern) ||
-          row.other.match(pattern)
-          // row.Skills.find((element) => {
+          row.f_name.match(pattern) ||
+          row.l_name.match(pattern) ||
+          row.attendance.match(pattern) 
+          // row.programming.match(pattern) ||
+          // row.datascience.match(pattern) ||
+          // row.webdev.match(pattern) ||
+          // row.math.match(pattern) ||
+          // row.other.match(pattern)
+          // row.skills.find((element) => {
           // 	if (element.includes(search)) {
           // 		return true;
           // 	}
@@ -71,24 +72,28 @@
   }
 </script>
 
-<Search number_entries={data.length} bind:value={search} />
+<Search bind:value={search} bind:number_entries={visibleEntries.length} />
 
 <div class="tableFixHead">
   <table class="table is-fullwidth ">
     <thead>
       <tr>
+        <!-- Pic and name col -->
         <th class="" id="pic_col">
         </th>
-        <th id="prog_col">
+        <!-- attendance col -->
+        <th id="attendance_col">
           <h3 class="has-text-weight-semibold has-text-centered p-2">
-            Programmierung
+            Art der Teilnahme
           </h3>
         </th>
+        <!-- skill col -->
         <th id="skill_col">
           <h3 class="has-text-weight-semibold  p-2 has-text-centered">
             Kompetenzen
           </h3>
         </th>
+        <!-- email col -->
         <th class="is-hidden-mobile has-text-centered">
           <h3 class="has-text-weight-semibold  p-2">Kontakt</h3>
         </th>
@@ -97,15 +102,12 @@
     <tbody>
       {#each visibleEntries as row}
         <Entry
-          vorname={row.vorname}
-          nachname={row.nachname}
+          f_name={row.f_name}
+          l_name={row.l_name}
           email={row.email}
           job={row.job}
-          programming={row.programming}
-          datascience={row.datascience}
-          webdev={row.webdev}
-          math={row.math}
-          other={row.other}
+          attendance={row.attendance}
+          skills={row.skills}
           picture_of={picture_of_gen(row.vorname, row.nachname, row.id)}
           found={pic_search(picture_of_gen(row.vorname, row.nachname, row.id))}
         />

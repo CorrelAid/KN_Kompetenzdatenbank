@@ -64,14 +64,22 @@ npm run dev
 
 Follow the [Official Instructions](https://render.com/docs/deploy-sveltekit) and add .env contents 
 
+## Project Infos
+### Authentication mechanism
+Authentication happens through [magic links](https://supabase.com/docs/guides/auth/auth-magic-link). Only admins and confirmed participants can request links. Admins need to be added with the python script "python_scripts/admins.py". This script adds an email to the table "admin_emails" and sends an inivitation link. If a users e-mail exists in the table "admin_emails" a trigger causes the user to be added to the "auth_role" table with the value "true" for "admin". The same trigger will set "admin" to "false" if regular users (not in "admin_email" table) get added to the authentication table. Participants can request magic links if they are in the table "main" and "confirmed" is set to "true". Admins can confirm users through the GUI.
+
+### How is the data upload handled?
+Administrators can upload data using the GUI by opening the corresponding modal. In the background, the csv is transformed with the function transform_array() (you can find it in src/lib/data_processing.js). This creates an array using the column indexes of the uploaded csv. 
+
 
 ## Todo
 
+- Invitation email template
 - handle weird writing of programming languae "C / C++"
 - add more error handling
 - add feature to delete/add/change entry
 - add feature that allows admins to confirm participants
-- deal with https://supabase.com/docs/guides/platform/permissions
+
 
 ## Long term development goals
 

@@ -74,7 +74,7 @@ create policy "Only authenticated admins can insert data"
   
   create policy "Only authenticated admins can delete data"
   on main
-  for delete with check (
+  for delete using (
     auth.uid() in (
       select get_admins()
     )
@@ -103,10 +103,7 @@ using (
 );
 
 create policy p2
-on storage.objects for insert
-with check (
-     auth.uid() in (
-       select get_admins()
+on storage.objects for insertb
      )
 );
 

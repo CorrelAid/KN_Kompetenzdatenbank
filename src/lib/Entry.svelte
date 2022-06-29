@@ -1,37 +1,31 @@
 <script>
   import Modal from "$lib/Modal.svelte";
-  import { download_picture} from "$lib/db_queries.js";
+  import { download_picture } from "$lib/db_queries.js";
   import { session } from "$app/stores";
 
-  export let vorname;
-  export let nachname;
+  export let f_name;
+  export let l_name;
   export let email;
   export let job;
-  export let programming;
-  export let datascience;
-  export let webdev;
-  export let math;
-  export let other;
+  export let attendance;
+  export let skills;
   export let found;
   export let picture_of;
-
-
 
   let src = "/img/placeholder.png";
 
   let modal_pkg = {
     modal: false,
     modal_title: "",
-    found: null
+    found: null,
   };
-
 
   function upload_pictures() {
     modal_pkg = {
       modal: true,
       modal_title: "Upload Picture",
       picture_of: picture_of,
-      found: found
+      found: found,
     };
   }
 
@@ -45,12 +39,13 @@
         console.error("Error downloading image: ", error.message);
       }
     } else {
-      src =  "/img/placeholder.png";
+      src = "/img/placeholder.png";
     }
   }
 </script>
 
 <tr>
+  <!-- Pic and name col -->
   <td class="pic_td">
     <div id="pic_text_cont">
       <figure class="image is-3by4">
@@ -68,36 +63,41 @@
       </figure>
 
       <p class="pt-2 has-text-weight-bold is-size-5-desktop">
-        {vorname}
-        {nachname}
+        {f_name}
+        {l_name}
       </p>
       <p class="pb-1 has-text-weight-medium">{job}</p>
     </div>
-    <a class="icon-text has-text-link is-hidden-desktop  pl-2 " href="mailto:{email}">
+    <a
+      class="icon-text has-text-link is-hidden-desktop  pl-2 "
+      href="mailto:{email}"
+    >
       <span class="icon has-text-info ">
-        <i class="fas fa-envelope "></i>
+        <i class="fas fa-envelope " />
       </span>
       <span>Kontakt</span>
     </a>
   </td>
+  <!-- attendance col -->
+  <td class="is-hidden-mobile has-text-centered">
+    <p class="p-2">
+      {attendance}
+    </p>
+  </td>
+  <!-- skill col -->
   <td>
     <div class="icon_cont">
       <div class="is-flex-direction-row">
-        {#each JSON.parse(programming) as language}
-          <span class="icon m-2 is-medium">
-            <img
-              src="/img/{language}.svg"
-              alt={language}
-              style="height: 100%;"
-            />
-          </span>
-        {/each}
+        <!-- {#each JSON.parse(skills) as skill} -->
+        <span class="tag m-1">
+          {skills}
+        </span>
+        <!-- {/each} -->
       </div>
-     
     </div>
   </td>
-  <td>
-    <div class="is-flex-direction-row has-text-centered">
+  <!-- <td> -->
+  <!-- <div class="is-flex-direction-row has-text-centered">
       {#each JSON.parse(datascience) as item}
         <span class="tag m-1">
           {item}
@@ -123,8 +123,9 @@
         </div>
       </article>
       {/if}
-    </div>
-  </td>
+    </div> -->
+  <!-- </td> -->
+  <!-- email col -->
   <td class="is-hidden-mobile has-text-centered">
     <p class="p-2">
       <a href="mailto:{email}">{email}</a>
@@ -133,7 +134,7 @@
   <td />
 </tr>
 
-<Modal {...modal_pkg}/>
+<Modal {...modal_pkg} />
 
 <style>
   /* The overlay effect - lays on top of the container and over the image */
@@ -168,7 +169,7 @@
     margin: auto;
   }
 
-  .message{
+  .message {
     max-width: 20vh;
     margin: auto;
   }
