@@ -10,14 +10,27 @@ export const insert_data = async function (x) {
     }
 }
 
-export const get_data = async function () {
-  const { data, error } = await supabase
+export const get_data = async function (admin) {
+  if (admin === true){
+    const { data, error } = await supabase
     .from('main')
     .select()
     if (error){
       throw new Error("error getting data:" + JSON.stringify(error));
     }
   return data
+  }
+  else{
+    const { data, error } = await supabase
+    .from('main')
+    .select()
+    .match({confirmed: true})
+    if (error){
+      throw new Error("error getting data:" + JSON.stringify(error));
+    }
+  return data
+  }
+  
 }
 
 async function delete_rows() {
@@ -60,7 +73,6 @@ export const check_admin = async function (x) {
         .eq("email", x.email)
 
       result = data[0].admin
-
     }
     else {
       let { data, error } = await supabase
@@ -78,8 +90,22 @@ export const check_admin = async function (x) {
   else {
     return false
   }
-
 }
+
+export const confirm_user = async function(x){
+  console.log(x)
+  const { data, error } = await supabase.from("main").update({confirmed: true}).eq("id", x);
+   console.log(data)
+      return {data, error}
+  }
+
+  export const disaffirm_user = async function(x){
+    console.log(x)
+    const { data, error } = await supabase.from("main").update({confirmed: false}).eq("id", x);
+     console.log(data)
+        return {data, error}
+    }
+
 //////////////////////
 
 // supabase storage //

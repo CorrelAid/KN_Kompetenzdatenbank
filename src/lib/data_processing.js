@@ -57,19 +57,28 @@ const to_list = function (x) {
 //     return lst
 // }
 
-const handle_skills = function (skills_cats, lst) {
-    let nw = [];
+const handle_skills = function (lst) {
+    let nw = {
+        0:check_null(lst[0].split(",")),
+        1:check_null(lst[1].split(",")),
+        2:check_null(lst[2].split(",")),
+        3:check_null(lst[3].split(",")),
+        4:check_null(lst[4].split(",")),
+        5:check_null(lst[5].split(",")),
+        6:check_null(lst[6].split(",")),
+        7:check_null(lst[7].split(",")),
+        8:check_null(lst[8].split(","))
+    };
 
-    lst = lst.map(function (e) {
-        return check_null(e.split(","));
-    });
+    // lst = lst.map(function (e) {
+    //     return check_null(e.split(","));
+    // });
     
-    console.log(lst)
+    console.log(nw)
 
-    lst = lst.flat(Infinity)
+    // lst = lst.flat(Infinity)
 
-    console.log(lst)
-    return(lst)
+    return(nw)
     // return {
     //     "Marketing und Kommunikation": lst[0].split(","),
     //     "Concepting": lst[1].split(","),
@@ -120,7 +129,7 @@ export const transform_array = function (x) {
                 l_name: check_null(object[3]),
                 job: check_null(object[5]),
                 attendance: handle_attendance(check_null(object[6])),
-                skills: handle_skills(object[9], [object[10], object[11], object[12], object[13], object[14], object[15], object[16], object[17], object[18]]),
+                skills: handle_skills([object[10], object[11], object[12], object[13], object[14], object[15], object[16], object[17], object[18]]),
                 confirmed: false
             }
         }

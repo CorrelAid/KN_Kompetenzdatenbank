@@ -76,7 +76,6 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
-- Teilnehmer*in/Mentor*in Filter
 - Invitation email template
 - add more error handling
 - add feature to delete/add/change entry

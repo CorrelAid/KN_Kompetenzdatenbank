@@ -24,6 +24,10 @@ begin
 end;
 $$ language plpgsql security definer;
 
+
+DROP TRIGGER IF EXISTS on_auth_user_created
+ON auth.users CASCADE;
+
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
@@ -34,8 +38,8 @@ create trigger on_auth_user_created
 CREATE TABLE IF NOT EXISTS main( 
     id SERIAL NOT NULL PRIMARY KEY,
     email varchar(254),
-    vorname varchar(100),
-    nachname varchar(100),
+    f_name varchar(100),
+    l_name varchar(100),
     job varchar(100),
     attendance text,
     skills text,
@@ -45,12 +49,24 @@ CREATE TABLE IF NOT EXISTS main(
 alter table main
   enable row level security;
 
-create policy "Participants data are viewable by authenticated users."
+drop policy if exists a1 on main;
+
+create policy a1
 on main for select
 to authenticated
 using (
   true
 );
+
+DROP POLICY IF EXISTS a2 ON main;
+
+create policy a2
+on main for update
+using (
+    auth.uid() in (
+      select get_admins()
+    )
+  );
 
 create or replace function get_admins()
 returns setof uuid
@@ -84,14 +100,18 @@ create or replace function delete_all() returns VOID as $$
   truncate main
 $$ language sql;
 
+-- STORAGE -------------------
+
+
+insert into storage.buckets (id, name)
+values ('pictures', 'pictures');
+
+DROP POLICY IF EXISTS list_all_buckets ON storage.buckets CASCADE;
+
 create policy list_all_buckets
 on storage.buckets for select using (
 true
 );
-
--- STORAGE -------------------
-insert into storage.buckets (id, name)
-values ('pictures', 'pictures');
 
 DROP POLICY IF EXISTS p1 ON storage.objects CASCADE;
 
@@ -102,21 +122,23 @@ using (
   and auth.role() = 'authenticated'
 );
 
+DROP POLICY IF EXISTS p2 ON storage.objects CASCADE;
+
 create policy p2
-on storage.objects for insertb
+on storage.objects for insert
+with check (
+     auth.uid() in (
+       select get_admins()
      )
 );
 
-create policy p3
-on storage.objects for update
-using (
-  bucket_id = 'pictures'
-  and auth.role() = 'authenticated'
-);
+DROP POLICY IF EXISTS p3 ON storage.objects CASCADE;
 
-create policy p4
+create policy p3
 on storage.objects for delete
 using (
   bucket_id = 'pictures'
   and auth.role() = 'authenticated'
+)
+
 )

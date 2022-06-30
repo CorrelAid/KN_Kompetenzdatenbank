@@ -1,10 +1,11 @@
 <script context="module">
-  import { get_pictures, get_data } from "$lib/db_queries.js";
 
   export async function load({ session }) {
     if (session.authenticated == true) {
       return {
-        props: {},
+        props: {
+          admin: session.admin
+        },
       };
     } else {
       return {
@@ -19,22 +20,30 @@
   import Entry from "$lib/Entry.svelte";
   import Search from "$lib/Search.svelte";
   import { onMount } from "svelte";
+  import {get_data, get_pictures} from "$lib/db_queries.js"
+
+  export let admin;
 
   let data = [];
   let pictures;
+  
+  let cat = 0;
+  
 
   $: loaded = false;
 
   onMount(async () => {
     try {
-      data = await get_data();
+      data = await get_data(admin);
       pictures = await get_pictures();
     } catch (ex) {
-      message = ex;
+      message = "error: " + ex;
     } finally {
       loaded = true;
     }
   });
+
+  $: console.log(data)
 
   let search = "";
   let message;
@@ -103,6 +112,11 @@
   function picture_of_gen(x, y, z) {
     return `${z}`;
   }
+
+  function handle_drip(event){
+		cat = event.detail.text
+  }
+
 </script>
 
 {#if loaded === false}
@@ -110,7 +124,7 @@
     <div class="loader is-loading" />
   </div>
 {:else if loaded === true}
-  <Search number_entries={data.length} {flt_radio} {flt} bind:value={search} />
+  <Search number_entries={data.length} {flt_radio} {flt} bind:value={search} on:message={handle_drip}/>
   {#if message}
     <p class="has-text-danger mt-4">{message}</p>
   {/if}
@@ -122,9 +136,9 @@
           <!-- Pic and name col -->
           <th class="" id="pic_col" />
           <!-- attendance col -->
-          <th id="attendance_col">
+          <th class="is-hidden-mobile" id="attendance_col">
             <h3
-              class="has-text-weight-semibold has-text-centered p-2 is-hidden-mobile"
+              class="has-text-weight-semibold has-text-centered p-2"
             >
               Art der Teilnahme
             </h3>
@@ -153,6 +167,8 @@
             picture_of={picture_of_gen(row.id)}
             found={pic_search(picture_of_gen(row.id))}
             id={row.id}
+            confirmed={row.confirmed}
+            cat={cat}
           />
         {/each}
       </tbody>
@@ -198,18 +214,11 @@
 
   @media only screen and (max-width: 768px) {
     #pic_col {
-      width: 15%;
-    }
-    #attendance_col {
-      width: 15%;
+      width: auto;
     }
 
     #skill_col {
       width: auto;
-    }
-
-    #email_col {
-      width: 0%;
     }
   }
 
