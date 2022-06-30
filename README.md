@@ -76,10 +76,12 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
+- fnish mentor checkbox
 - Invitation email template
+- add hackathon logo
 - add more error handling
 - add feature to delete/add/change entry
-- add feature that allows admins to confirm participants
+- resposive admin area
 - fix:
 ```
 node:internal/errors:465

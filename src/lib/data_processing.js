@@ -121,7 +121,7 @@ const handle_attendance = function (y) {
 
 
 export const transform_array = function (x) {
-    const y = x.slice(1, 10).slice(1, (x.length - 1)).map(object => {
+    const y = x.slice(1, (x.length - 1)).map(object => {
         if (object) {
             return {
                 email: check_null(object[1]),

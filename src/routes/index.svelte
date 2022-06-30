@@ -50,7 +50,7 @@
 
   function flt() {
     // Declare variables
-    var tbody, tr, name, nameval, skill, att, attval, i, index;
+    var tbody, tr, name, nameval, skill, i, index;
 
     tbody = document.getElementsByTagName("tbody")[0];
     tr = tbody.getElementsByTagName("tr");
@@ -60,8 +60,6 @@
       name = tr[i].getElementsByClassName("name")[0];
       nameval = (name.textContent || name.innerText).toLowerCase();
 
-      att= tr[i].getElementsByClassName("attendance")[0];
-      attval = (att.textContent || att.innerText).toLowerCase();
 
       skill = tr[i].getElementsByClassName("skill");
       skill = Array.prototype.slice.call(skill);
@@ -77,7 +75,7 @@
         }
       }
 
-      if (nameval.indexOf(search.toLowerCase()) > -1 || found === true || attval.indexOf(search.toLowerCase()) > -1) {
+      if (nameval.indexOf(search.toLowerCase()) > -1 || found === true) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
@@ -86,18 +84,18 @@
   }
 
   function flt_radio(x) {
-    // var tbody, tr, attendance, attval, i;
-    // tbody = document.getElementsByTagName("tbody")[0];
-    // tr = tbody.getElementsByTagName("tr");
-    // for (i = 0; i < tr.length; i++) {
-    //   attendance = tr[i].getElementsByClassName("attendance")[0];
-    //   attval = (attendance.textContent || attendance.innerText).toLowerCase();
-    //   if (attval.indexOf(x)) {
-    //     tr[i].style.display = "";
-    //   } else {
-    //     tr[i].style.display = "none";
-    //   }
-    // }
+    var tbody, tr, attendance, attval, i;
+    tbody = document.getElementsByTagName("tbody")[0];
+    tr = tbody.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      attendance = tr[i].getElementsByClassName("attendance")[0];
+      attval = (attendance.textContent || attendance.innerText).toLowerCase();
+      if (attval.indexOf(x)) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
   }
 
   const pic_search = function (x) {

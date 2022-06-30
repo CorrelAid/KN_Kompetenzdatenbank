@@ -2,11 +2,12 @@ import { supabase } from "$lib/supabaseClient";
 import { get_custom_elements_slots } from "svelte/internal";
 import { get } from "svelte/store";
 
-async function get_emails() {
+async function get_conf_emails() {
 
     const { data, error } = await supabase
         .from('main')
         .select("email")
+        .match({confirmed: true})
     return data
 
 }
@@ -29,7 +30,7 @@ async function get_users() {
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ request }) {
 
-    const emails = await get_emails()
+    const emails = await get_conf_emails()
 
     const users = await get_users()
 

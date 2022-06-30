@@ -62,8 +62,6 @@
   let visible = [];
   $: visible = Object.values(skills).flat(Infinity);
 
-  $: console.log(visible);
-
   $: {
     cat === 0
       ? (visible = Object.values(skills).flat(Infinity))
