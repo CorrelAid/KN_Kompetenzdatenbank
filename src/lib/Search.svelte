@@ -1,9 +1,11 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 	export let value;
-	export let number_entries;
+	// export let number_entries;
 	export let flt;
-	export let flt_radio;
+	export let flt_ment;
+	export let flt_orga;
+	export let drop_text = "Alles";
 
 	const dispatch = createEventDispatcher();
 
@@ -11,13 +13,15 @@
 		dispatch("message", {
 			text: i,
 		});
+		drop_text = cat_list[i]
 	}
 
 	let is_active = "";
-	let checked = false;
+	let check1 = false;
+	let check2 = false;
 
 	let cat_list = [
-		"Alle",
+		"Alles",
 		"Marketing und Kommunikation",
 		"Concepting",
 		"Programmierung",
@@ -29,10 +33,29 @@
 		"Maker",
 	];
 
-	function handle_check(){
-		if (checked){
-			alert("yes")
+	function handle_check_ment(){
+		if (check1===false){
+			flt_orga(true)
+			flt_ment(false)
+			check2 = false
 		}
+		else{
+			flt_orga(false)
+			flt_ment(true)
+		}
+	}
+
+	function handle_check_orga(){
+		if (check2===false){
+			flt_ment(true)
+			flt_orga(false)
+			check1 = false
+		}
+		else{
+			flt_ment(false)
+			flt_orga(true)
+			
+	}
 	}
 
 	function handle_drip() {
@@ -63,7 +86,7 @@
 						aria-haspopup="true"
 						aria-controls="dropdown-menu"
 					>
-						<span>Kategorien</span>
+						<span>{drop_text}</span>
 						<span class="icon is-small">
 							<i class="fas fa-angle-down" aria-hidden="true" />
 						</span>
@@ -98,15 +121,21 @@
 				</p>
 			</div>
 		</div>
-		<div class="level-item ml-2">
+		<!-- <div class="level-item ml-2">
 			<p class="subtitle is-5 is-hidden-mobile">
 				<strong>{number_entries}</strong> Einträge
 			</p>
+		</div> -->
+		<div class="px-2 level-item">
+			<label class="checkbox">
+				<input type="checkbox" bind:checked={check1} on:input={handle_check_ment}/>
+				Zeige Mentor*innen
+			</label>
 		</div>
 		<div class="px-2 level-item">
 			<label class="checkbox">
-				<input type="checkbox" bind:checked={checked} on:input={handle_check}/>
-				Zeige Mentor*innen
+				<input type="checkbox" bind:checked={check2} on:input={handle_check_orga}/>
+				Zeige Veranstalter*innen
 			</label>
 		</div>
 	</div>

@@ -76,12 +76,8 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
-- fnish mentor checkbox
-- Invitation email template
-- add hackathon logo
 - add more error handling
-- add feature to delete/add/change entry
-- resposive admin area
+- responsive admin area
 - fix:
 ```
 node:internal/errors:465
@@ -103,10 +99,12 @@ TypeError [ERR_INVALID_URL]: Invalid URL
   code: 'ERR_INVALID_URL'
 }
 ```
-- Fix long loading times when loading table row components (Entries). I have no idea why that happens. I had to switch search functionalities to vanilla js because of that.
+- Fix long loading times when loading table row components (Entries). I have no idea why that happens. I had to switch search functionalities to vanilla js because of that
+
 
 
 ## Long term development goals
 
 - Send invitation e-mails from custom e-mail instead of supabase mail (use some mail api, e.g. [Googles](https://developers.google.com/gmail/api/quickstart/nodejs))
+- add feature to delete/add/change entry
 

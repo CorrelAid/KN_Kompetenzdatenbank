@@ -6,14 +6,13 @@
     insert_data,
     upload_picture,
     update_pic,
-    gen_file_name,
     delete_everything,
   } from "$lib/db_queries.js";
   import { transform_array } from "$lib/data_processing.js";
 
   export let modal;
   export let modal_title;
-  export let picture_of = "";
+  export let id;
   export let found = false;
 
   let data;
@@ -21,7 +20,8 @@
   let picture;
   let valid = false;
   let message = "";
-  let done = false;
+
+ 
 
   function closeModal() {
     modal = false;
@@ -46,32 +46,36 @@
     // DATA
     if (modal_title === "Upload Data" && data) {
       loading = true;
-      try{
+      try {
         data = transform_array(data);
         await delete_everything();
         await insert_data(data);
         loading = false;
         modal = false;
         location.reload();
-      }
-      catch(ex){
-        message=ex
+      } catch (ex) {
+        message = ex;
         loading = false;
-      }  
+      }
       //
       // PICTURES
     } else if (modal_title === "Upload Picture") {
       loading = true;
-      if (picture) {
-        if (found == true) {
-          await update_pic(picture_of, picture);
-        } else if (found == false) {
-          const file_name = gen_file_name(picture_of);
-          await upload_picture(file_name, picture);
-        }
 
-        modal = false;
-        location.reload();
+      if (picture) {
+        try {
+          if (found == true) {
+            await update_pic(id, picture);
+          } else if (found == false) {
+            await upload_picture(id, picture);
+          }
+          loading = false;
+          modal = false;
+          location.reload();
+        } catch (ex) {
+          message = ex;
+          loading = false;
+        }
       } else {
         message = "Please select a file.";
         loading = false;
@@ -116,7 +120,7 @@
     <section class="modal-card-body has-text-centered">
       <!-- DATA -->
       {#if modal_title === "Upload Data"}
-        <UploadData message={message}, onDataUpload={onDataUpload} />
+        <UploadData message="{message}," {onDataUpload} />
         <!-- PICTURES -->
       {:else if modal_title === "Upload Picture"}
         <UploadPicture {message} on:message={handle_picture_message} />

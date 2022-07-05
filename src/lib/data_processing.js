@@ -115,6 +115,12 @@ const handle_attendance = function (y) {
     else if (y.includes("Zuschauer")) {
         return ("Zuschauer*in")
     }
+    else if (y.includes("Veranstalter")) {
+        return ("Veranstalter*in")
+    }
+    else if (y.includes("Orga-Team")) {
+        return ("Veranstalter*in")
+    }
     else { return (y) }
 }
 

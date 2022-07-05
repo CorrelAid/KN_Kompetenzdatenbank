@@ -43,7 +43,6 @@
     }
   });
 
-  $: console.log(data)
 
   let search = "";
   let message;
@@ -83,20 +82,49 @@
     }
   }
 
-  function flt_radio(x) {
+  function flt_ment(check) {
     var tbody, tr, attendance, attval, i;
     tbody = document.getElementsByTagName("tbody")[0];
     tr = tbody.getElementsByTagName("tr");
+   
+    
+    const search = "Mentor*in"
+
     for (i = 0; i < tr.length; i++) {
       attendance = tr[i].getElementsByClassName("attendance")[0];
-      attval = (attendance.textContent || attendance.innerText).toLowerCase();
-      if (attval.indexOf(x)) {
+      attval = (attendance.textContent || attendance.innerText);
+
+     
+      if (attval.includes(search) || check == true) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
       }
     }
   }
+
+  function flt_orga(check) {
+    var tbody, tr, attendance, attval, i;
+    tbody = document.getElementsByTagName("tbody")[0];
+    tr = tbody.getElementsByTagName("tr");
+   
+    
+    const search = "Veranstalter*in"
+
+    for (i = 0; i < tr.length; i++) {
+      attendance = tr[i].getElementsByClassName("attendance")[0];
+      attval = (attendance.textContent || attendance.innerText);
+
+     
+      if (attval.includes(search) || check == true) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+
+
 
   const pic_search = function (x) {
     for (var i = 0; i < pictures.length; i++) {
@@ -107,10 +135,6 @@
     return false;
   };
 
-  function picture_of_gen(x, y, z) {
-    return `${z}`;
-  }
-
   function handle_drip(event){
 		cat = event.detail.text
   }
@@ -118,11 +142,11 @@
 </script>
 
 {#if loaded === false}
-  <div class="loader-wrapper">
+  <div class="loader-wrapper mt-5">
     <div class="loader is-loading" />
   </div>
 {:else if loaded === true}
-  <Search number_entries={data.length} {flt_radio} {flt} bind:value={search} on:message={handle_drip}/>
+  <Search number_entries={data.length} {flt_ment} {flt_orga} {flt} bind:value={search} on:message={handle_drip}/>
   {#if message}
     <p class="has-text-danger mt-4">{message}</p>
   {/if}
@@ -162,8 +186,7 @@
             job={row.job}
             attendance={row.attendance}
             skills={JSON.parse(row.skills)}
-            picture_of={picture_of_gen(row.id)}
-            found={pic_search(picture_of_gen(row.id))}
+            found={pic_search(row.id.toString())}
             id={row.id}
             confirmed={row.confirmed}
             cat={cat}
@@ -176,7 +199,7 @@
 
 <style>
   table {
-    margin-bottom: 50vh;
+    margin-bottom: 70vh;
     border-collapse: collapse;
     width: 100%;
   }
@@ -212,11 +235,11 @@
 
   @media only screen and (max-width: 768px) {
     #pic_col {
-      width: auto;
+      width: 20%;
     }
 
     #skill_col {
-      width: auto;
+      width: 80%;
     }
   }
 

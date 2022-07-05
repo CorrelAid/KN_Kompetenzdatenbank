@@ -2,8 +2,8 @@ body, html, #svelte_body{
     height: 100%
   }
 
-  @media only screen and (min-width: 1024px) {
+  
 body{
   overflow-y: hidden
 }
-  }
+  

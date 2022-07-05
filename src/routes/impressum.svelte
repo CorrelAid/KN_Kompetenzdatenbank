@@ -1,21 +1,24 @@
 <div class="content pt-3">
     <div class="icon-text pl-2">
         <span class="icon has-text-info">
-          <i class="fas fa-arrow-left   "></i>
+            <i class="fas fa-arrow-left   " />
         </span>
         <a href="/">Zurück zur Hauptseite</a>
-      </div>
-    <hr>
+    </div>
+    <hr />
     <div class="px-4">
-        <h4 class="has-text-centered">CorrelAid X Konstanz</h4>
+        <div class="level-item p-0 m-0 pb-4">
+            <img class="" src="/img/Correlaid_Logo.png" alt="Hackathon2 Logo" />
+        </div>
         <p class="has-text-centered">als Local Chapter von</p>
         <p class="has-text-centered"><strong>CorrelAid e.V.</strong></p>
         <p class="has-text-centered">Petersburger Str. 47</p>
         <p class="has-text-centered">10249 Berlin</p>
-        <p class="link_cont"><a href="mailto:konstanz@correlaid.org"
-            >konstanz@correlaid.org</a></p>
-        
-            <hr>
+        <p class="link_cont">
+            <a href="mailto:konstanz@correlaid.org">konstanz@correlaid.org</a>
+        </p>
+
+        <hr />
         <h3 class="is-underlined">Haftungsausschluss</h3>
         <h4>Haftung für Inhalte</h4>
         <p class="has-text-justified">
@@ -114,14 +117,23 @@
 </div>
 
 <style>
-.content{
-    overflow-y: scroll;
-    height: 100vh;
-    padding-bottom: 20vh;
-}
+    .content {
+        overflow-y: scroll;
+        height: 100vh;
+        padding-bottom: 20vh;
+    }
 
-.link_cont{
-    text-align: center;
-}
+    .link_cont {
+        text-align: center;
+    }
 
+    img {
+        width: 140px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+    img {
+      width: 120px;
+    }
+  }
 </style>

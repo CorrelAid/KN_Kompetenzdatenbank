@@ -14,7 +14,6 @@
   export let attendance;
   export let skills = [];
   export let found;
-  export let picture_of;
   export let id;
   export let confirmed;
   export let cat = 0;
@@ -25,13 +24,14 @@
     modal: false,
     modal_title: "",
     found: null,
+    id: ""
   };
 
   function upload_pictures() {
     modal_pkg = {
       modal: true,
       modal_title: "Upload Picture",
-      picture_of: picture_of,
+      id: id,
       found: found,
     };
   }
@@ -39,7 +39,7 @@
   async function download() {
     if (found) {
       try {
-        const { data, error } = await download_picture(picture_of);
+        const { data, error } = await download_picture(id);
         if (error) throw error;
         src = URL.createObjectURL(data);
       } catch (error) {
@@ -68,104 +68,98 @@
       : (visible = Object.values(skills[cat - 1]).flat(Infinity));
   }
 </script>
-{#if visible != ""}
-<tr {id}>
-  <!-- Pic and name col -->
-  <td class="pic_td">
-    <div id="pic_text_cont">
-      <figure class="image is-3by4">
-        <img {src} alt="placeholder" use:download />
-        {#if $session.admin == true}
-          <div class="overlay p-3">
-            <button class="button is-info" on:click={upload_pictures}>
-              <i
-                class="fas fa-upload icon is-medium p-1"
-                id="file_upload"
-              /></button
-            >
-          </div>
-        {/if}
-      </figure>
 
-      <p class="pt-2 has-text-weight-bold is-size-5-desktop name">
-        {f_name}
-        {l_name}
+{#if visible != ""}
+  <tr {id}>
+    <!-- Pic and name col -->
+    <td class="pic_td">
+      <div id="pic_text_cont">
+        <figure class="image is-3by4">
+          <img {src} alt="placeholder" use:download />
+          {#if $session.admin == true}
+            <div class="overlay p-3">
+              <button class="button is-info" on:click={upload_pictures}>
+                <i
+                  class="fas fa-upload icon is-medium p-1"
+                  id="file_upload"
+                /></button
+              >
+            </div>
+          {/if}
+        </figure>
+
+        <p class="pt-2 has-text-weight-bold is-size-5-desktop name">
+          {f_name}
+          {l_name}
+        </p>
+        <p class="has-text-weight-medium">{job}</p>
+      </div>
+      <a
+        class="icon-text has-text-link is-hidden-tablet p-2"
+        href="mailto:{email}"
+      >
+        <span class="icon has-text-info">
+          <i class="fas fa-envelope " />
+        </span>
+        <span>Kontakt</span>
+      </a>
+      <br>
+      <p class="pl-2 is-hidden-tablet attendance is-inline">
+        {attendance}
       </p>
-      <p class="has-text-weight-medium">{job}</p>
-    </div>
-    <a
-      class="icon-text has-text-link is-hidden-tablet p-2"
-      href="mailto:{email}"
-    >
-      <span class="icon has-text-info">
-        <i class="fas fa-envelope " />
-      </span>
-      <span>Kontakt</span>
-    </a>
-    <p class="pl-2 is-hidden-tablet attendance">
-      {attendance}
-    </p>
-    {#if $session.admin == true}
-      {#if confirmed == false}
-        <button class="button is-success ml-2" on:click={handle_confirm}>
-          <span class="icon is-small">
-            <i class="fas fa-check" />
-          </span>
-          <span>Confirm</span>
-        </button>
-      {:else if confirmed == true}
-        <button class="button is-danger ml-2" on:click={handle_confirm}>
-          <span class="icon is-small">
-            <i class="fas fa-ban" />
-          </span>
-          <span>Disaffirm</span>
-        </button>
+      {#if $session.admin == true}
+        {#if confirmed == false}
+          <button class="button is-success ml-2 mt-2" on:click={handle_confirm}>
+            <span class="icon is-small">
+              <i class="fas fa-check" />
+            </span>
+            <span>Confirm</span>
+          </button>
+        {:else if confirmed == true}
+          <button class="button is-danger ml-2 mt-2" on:click={handle_confirm}>
+            <span class="icon is-small">
+              <i class="fas fa-ban" />
+            </span>
+            <span>Disaffirm</span>
+          </button>
+        {/if}
       {/if}
-    {/if}
-  </td>
-  <!-- attendance col -->
-  <td class="has-text-centered is-hidden-mobile">
-    <p class="p-2 attendance">
-      {attendance}
-    </p>
-  </td>
-  <!-- skill col -->
-    <td>
-     
-      <div class="icon_cont is-hidden-tablet">
-        <div class="is-flex-direction-row">
-          {#each visible as skill}
-            {#if skill != ""}
-              <span class="tag m-1 skill">
-                {skill}
-              </span>
-              <br />
-            {/if}
-          {/each}
-        </div>
-      </div>
-      <div class="icon_cont is-hidden-mobile">
-        <div class="is-flex-direction-row">
-          {#each visible as skill}
-            {#if skill != ""}
-              <span class="tag m-1 skill">
-                {skill}
-              </span>
-            {/if}
-          {/each}
-        </div>
-      </div>
-      
     </td>
- 
-  <!-- email col -->
-  <td class="is-hidden-mobile has-text-centered">
-    <p class="p-2">
-      <a href="mailto:{email}">{email}</a>
-    </p>
-  </td>
-  <td />
-</tr>
+    <!-- attendance col -->
+    <td class="has-text-centered is-hidden-mobile">
+      <p class="p-2 attendance">
+        {attendance}
+      </p>
+    </td>
+    <!-- skill col -->
+    <td class="icon_cont is-hidden-tablet is-flex-direction-row">
+      {#each visible as skill}
+        {#if skill != ""}
+          <span class="tag m-1 skill">
+            {skill}
+          </span>
+          <br />
+        {/if}
+      {/each}
+    </td>
+    <td class="icon_cont is-hidden-mobile is-flex-direction-row">
+      {#each visible as skill}
+        {#if skill != ""}
+          <span class="tag m-1 skill">
+            {skill}
+          </span>
+        {/if}
+      {/each}
+    </td>
+
+    <!-- email col -->
+    <td class="is-hidden-mobile has-text-centered">
+      <p class="p-2">
+        <a href="mailto:{email}">{email}</a>
+      </p>
+    </td>
+    <td />
+  </tr>
 {/if}
 <Modal {...modal_pkg} />
 
@@ -196,12 +190,19 @@
 
   #pic_text_cont {
     margin-left: 1vh;
+    /* width: 20vh; */
   }
 
   img {
     max-width: 100%;
     height: auto;
 }
+
+@media only screen and (max-width: 1024px) {
+  #pic_text_cont {
+      width: 120px;
+    }
+  }
 
 
   .message-header-text {
