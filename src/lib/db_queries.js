@@ -48,23 +48,30 @@ export const delete_everything = async function () {
 }
 
 export const check_email = async function (x) {
+  try{
   if (x) {
     const { data, error } = await supabase
-      .from('auth_roles')
-      .select("email, admin")
+      .from('main')
+      .select("email, confirmed")
       .eq("email", x.toLowerCase())
-    if (data.length == 1) {
+
+      console.log(data[0]["confirmed"])
+    if (data.length == 1 && data[0]["confirmed"] === true) {
       return true
     }
   }
   else {
     return false
   }
-
+}
+catch{
+  return false
+}
 }
 
 export const check_admin = async function (x) {
   let result;
+  try{
   if (x) {
     if (x.email) {
       let { data, error } = await supabase
@@ -91,6 +98,11 @@ export const check_admin = async function (x) {
     return false
   }
 }
+catch{
+  return false
+}
+}
+
 
 export const confirm_user = async function (x) {
   const { data, error } = await supabase.from("main").update({ confirmed: true }).eq("id", x);

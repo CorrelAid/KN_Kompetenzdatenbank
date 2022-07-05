@@ -57,11 +57,7 @@
   </form>
 
   <p class="is-size-4 is-size-5-mobile px-2 pb-2">
-    Du kannst auf die Kompetenzdatenbank mit einem Link zugreifen, den wir dir
-    per E-Mail geschickt haben.
-  </p>
-  <p class="px-2 is-size-5 is-size-6-mobile">
-    Wenn du einen neuen Link zugesendet haben willst, gib oben deine Mail an.
+    Gib bitte deine E-Mail-Adresse an, um einen Einladunglink für die Kompetentdatenbank zu erhalten.
   </p>
 
   <div

@@ -1,14 +1,17 @@
 import { supabase } from "$lib/supabaseClient";
-import { check_email } from "$lib/db_queries.js";
+import { check_email, check_admin } from "$lib/db_queries.js";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ request }) {
   const data = await request.json(); // or .json(), or .text(), etc
   const email = data["email"]
 
-  const check = await check_email(email)
+  const check_mail = await check_email(email);
+  const check_admn = await check_admin(email)
 
-  if (check === true) {
+  
+
+  if (check_mail === true || check_admn === true) {
     const { user, session, error } = await supabase.auth.signIn({
       email
     })
