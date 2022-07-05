@@ -14,6 +14,7 @@
 		flt_orga(false);
 		check1 = false;
 		check2 = false;
+		value = "";
 		dispatch("message", {
 			text: i,
 		});
@@ -38,8 +39,8 @@
 	];
 
 	function search(){
-		flt_ment(true);
-		flt_orga(true);
+		flt_ment(false);
+		flt_orga(false);
 		check1 = false;
 		check2 = false;
 		flt()
