@@ -10,10 +10,14 @@
 	const dispatch = createEventDispatcher();
 
 	function send_event(i) {
+		flt_ment(false);
+		flt_orga(false);
+		check1 = false;
+		check2 = false;
 		dispatch("message", {
 			text: i,
 		});
-		drop_text = cat_list[i]
+		drop_text = cat_list[i];
 	}
 
 	let is_active = "";
@@ -33,29 +37,34 @@
 		"Maker",
 	];
 
-	function handle_check_ment(){
-		if (check1===false){
-			flt_orga(true)
-			flt_ment(false)
-			check2 = false
-		}
-		else{
-			flt_orga(false)
-			flt_ment(true)
+	function search(){
+		flt_ment(true);
+		flt_orga(true);
+		check1 = false;
+		check2 = false;
+		flt()
+	}
+
+	function handle_check_ment() {
+		if (check1 === false) {
+			flt_orga(false);
+			flt_ment(true);
+			check2 = false;
+		} else {
+			flt_orga(false);
+			flt_ment(false);
 		}
 	}
 
-	function handle_check_orga(){
-		if (check2===false){
-			flt_ment(true)
-			flt_orga(false)
-			check1 = false
+	function handle_check_orga() {
+		if (check2 === false) {
+			flt_ment(false);
+			flt_orga(true);
+			check1 = false;
+		} else {
+			flt_ment(false);
+			flt_orga(false);
 		}
-		else{
-			flt_ment(false)
-			flt_orga(true)
-			
-	}
 	}
 
 	function handle_drip() {
@@ -116,7 +125,7 @@
 						type="search"
 						placeholder="Suche"
 						bind:value
-						on:input={flt}
+						on:input={search}
 					/>
 				</p>
 			</div>
@@ -128,13 +137,21 @@
 		</div> -->
 		<div class="px-2 level-item">
 			<label class="checkbox">
-				<input type="checkbox" bind:checked={check1} on:input={handle_check_ment}/>
+				<input
+					type="checkbox"
+					bind:checked={check1}
+					on:input={handle_check_ment}
+				/>
 				Zeige Mentor*innen
 			</label>
 		</div>
 		<div class="px-2 level-item">
 			<label class="checkbox">
-				<input type="checkbox" bind:checked={check2} on:input={handle_check_orga}/>
+				<input
+					type="checkbox"
+					bind:checked={check2}
+					on:input={handle_check_orga}
+				/>
 				Zeige Veranstalter*innen
 			</label>
 		</div>

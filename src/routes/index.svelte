@@ -1,10 +1,9 @@
 <script context="module">
-
   export async function load({ session }) {
     if (session.authenticated == true) {
       return {
         props: {
-          admin: session.admin
+          admin: session.admin,
         },
       };
     } else {
@@ -20,15 +19,14 @@
   import Entry from "$lib/Entry.svelte";
   import Search from "$lib/Search.svelte";
   import { onMount } from "svelte";
-  import {get_data, get_pictures} from "$lib/db_queries.js"
+  import { get_data, get_pictures } from "$lib/db_queries.js";
 
   export let admin;
 
   let data = [];
   let pictures;
-  
+
   let cat = 0;
-  
 
   $: loaded = false;
 
@@ -42,7 +40,6 @@
       loaded = true;
     }
   });
-
 
   let search = "";
   let message;
@@ -58,7 +55,6 @@
     for (i = 0; i < tr.length; i++) {
       name = tr[i].getElementsByClassName("name")[0];
       nameval = (name.textContent || name.innerText).toLowerCase();
-
 
       skill = tr[i].getElementsByClassName("skill");
       skill = Array.prototype.slice.call(skill);
@@ -76,55 +72,64 @@
 
       if (nameval.indexOf(search.toLowerCase()) > -1 || found === true) {
         tr[i].style.display = "";
+        tr[i].classList.remove("search_none");
       } else {
         tr[i].style.display = "none";
+        tr[i].classList.add("search_none");
       }
     }
   }
 
   function flt_ment(check) {
-    var tbody, tr, attendance, attval, i;
+    var tbody, tr, attendance, attval, i, att_display;
     tbody = document.getElementsByTagName("tbody")[0];
     tr = tbody.getElementsByTagName("tr");
-   
-    
-    const search = "Mentor*in"
+
+    const search = "Mentor*in";
 
     for (i = 0; i < tr.length; i++) {
       attendance = tr[i].getElementsByClassName("attendance")[0];
-      attval = (attendance.textContent || attendance.innerText);
+      attval = attendance.textContent || attendance.innerText;
 
-     
-      if (attval.includes(search) || check == true) {
+      if (check === true) {
+        if (attval.includes(search) && !tr[i].classList.contains("search_none")) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+          tr[i].classList.add("ment_none");
+        }
+      } else if (check === false && tr[i].classList.contains("ment_none") && !tr[i].classList.contains("search_none")) {
         tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+        tr[i].classList.remove("ment_none");
       }
     }
   }
 
   function flt_orga(check) {
-    var tbody, tr, attendance, attval, i;
+    var tbody, tr, attendance, attval, i, att_display;
     tbody = document.getElementsByTagName("tbody")[0];
     tr = tbody.getElementsByTagName("tr");
-   
-    
-    const search = "Veranstalter*in"
+
+    const search = "Veranstalter*in";
 
     for (i = 0; i < tr.length; i++) {
       attendance = tr[i].getElementsByClassName("attendance")[0];
-      attval = (attendance.textContent || attendance.innerText);
+      attval = attendance.textContent || attendance.innerText;
 
-     
-      if (attval.includes(search) || check == true) {
+      if (check === true) {
+        if (attval.includes(search) && !tr[i].classList.contains("search_none")) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+          tr[i].classList.add("orga_none");
+          // tr[i].classList.remove("orga");
+        }
+      } else if (check === false && tr[i].classList.contains("orga_none") && !tr[i].classList.contains("search_none")) {
         tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+        tr[i].classList.remove("orga_none");
       }
     }
   }
-
-
 
   const pic_search = function (x) {
     for (var i = 0; i < pictures.length; i++) {
@@ -135,10 +140,9 @@
     return false;
   };
 
-  function handle_drip(event){
-		cat = event.detail.text
+  function handle_drip(event) {
+    cat = event.detail.text;
   }
-
 </script>
 
 {#if loaded === false}
@@ -146,7 +150,14 @@
     <div class="loader is-loading" />
   </div>
 {:else if loaded === true}
-  <Search number_entries={data.length} {flt_ment} {flt_orga} {flt} bind:value={search} on:message={handle_drip}/>
+  <Search
+    number_entries={data.length}
+    {flt_ment}
+    {flt_orga}
+    {flt}
+    bind:value={search}
+    on:message={handle_drip}
+  />
   {#if message}
     <p class="has-text-danger mt-4">{message}</p>
   {/if}
@@ -159,9 +170,7 @@
           <th class="" id="pic_col" />
           <!-- attendance col -->
           <th class="is-hidden-mobile" id="attendance_col">
-            <h3
-              class="has-text-weight-semibold has-text-centered p-2"
-            >
+            <h3 class="has-text-weight-semibold has-text-centered p-2">
               Art der Teilnahme
             </h3>
           </th>
@@ -189,7 +198,7 @@
             found={pic_search(row.id.toString())}
             id={row.id}
             confirmed={row.confirmed}
-            cat={cat}
+            {cat}
           />
         {/each}
       </tbody>
