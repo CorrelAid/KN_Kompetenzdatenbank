@@ -1,7 +1,6 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 	export let value;
-	// export let number_entries;
 	export let flt;
 	export let flt_ment;
 	export let flt_orga;

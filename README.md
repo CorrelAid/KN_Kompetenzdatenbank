@@ -2,7 +2,7 @@
 
 App to use during hackathons. Serves the purpose of providing an overview of participants to simplify the creation of project teams.
 
-[WIP URL](https://kompetenzdatenbank.onrender.com/) 
+The code is a complete mess, will try to clean it up for future hackathons.
 
 
 ## Development Instructions
@@ -76,8 +76,6 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
-- add more error handling
-- responsive admin area
 - fix:
 ```
 node:internal/errors:465
@@ -100,6 +98,8 @@ TypeError [ERR_INVALID_URL]: Invalid URL
 }
 ```
 - Fix long loading times when loading table row components (Entries). I have no idea why that happens. I had to switch search functionalities to vanilla js because of that
+  - 10s without pics
+  - 13s with pics
 
 
 
@@ -107,4 +107,6 @@ TypeError [ERR_INVALID_URL]: Invalid URL
 
 - Send invitation e-mails from custom e-mail instead of supabase mail (use some mail api, e.g. [Googles](https://developers.google.com/gmail/api/quickstart/nodejs))
 - add feature to delete/add/change entry
-
+- responsive admin area
+- add more (and better) error handling
+- clean up this shitty code
