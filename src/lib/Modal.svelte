@@ -52,7 +52,7 @@
         await insert_data(data);
         loading = false;
         modal = false;
-        // location.reload();
+        location.reload();
       } catch (ex) {
         message = ex;
         loading = false;
@@ -71,7 +71,7 @@
           }
           loading = false;
           modal = false;
-          location.reload();
+          // location.reload();
         } catch (ex) {
           message = ex;
           loading = false;
