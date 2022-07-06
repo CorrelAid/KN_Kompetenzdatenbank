@@ -96,7 +96,10 @@ TypeError [ERR_INVALID_URL]: Invalid URL
   input: '/auth',
   code: 'ERR_INVALID_URL'
 }
+
 ```
+  - possible fix: https://kit.svelte.dev/docs/routing (try different api routes)
+
 - Fix long loading times when loading table row components (Entries). I have no idea why that happens. I had to switch search functionalities to vanilla js because of that
   - 10s without pics
   - 13s with pics
