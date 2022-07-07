@@ -44,14 +44,14 @@
     {#if $session.admin == true && $session.authenticated == true}
         <div class="column ">
             <button
-                class="button block is-primary m-0 mx-2"
+                class="button block m-0 mx-2"
                 on:click={upload_data}
             >
                 Upload data
             </button>
 
             <button
-                class="button block is-primary m-0 mx-2"
+                class="button block m-0 mx-2"
                 on:click={send_invitations}
             >
                 Send Invitations

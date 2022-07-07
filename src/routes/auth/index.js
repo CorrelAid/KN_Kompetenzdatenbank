@@ -22,6 +22,7 @@ export async function post({ request }) {
 export async function get({ request }) {
 	const { user, authenticated, admin } = await request.locals;
 	// refer hooks to see how this got populated
+	if(user)	
 	return {
 		body: { user, authenticated, admin },
 	};

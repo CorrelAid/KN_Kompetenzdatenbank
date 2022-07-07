@@ -15,6 +15,10 @@ The code is a complete mess, will try to clean it up for future hackathons.
 
 Open the SQL editor and click on "New Query". Paste the contents "sql/sql_commands.sql" and run the query.
 
+### 3. Edit E-Mail templates
+
+Copy and Paste E-Mail templates into supabase
+
 ### 3. Clone project
 
 ```

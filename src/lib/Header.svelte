@@ -2,7 +2,7 @@
   import { session } from "$app/stores";
 </script>
 
-<header class="level pt-5 pb-5 px-2 m-0">
+<header class="level pt-4 pb-4 px-2 m-0">
   <div class="level-item p-0 m-0">
     <img class="" src="/img/Logo_HackandHarvest.png" alt="Hackathon2 Logo" />
   </div>

@@ -135,7 +135,7 @@
     <td class="icon_cont is-hidden-tablet is-flex-direction-row">
       {#each visible as skill}
         {#if skill != ""}
-          <span class="tag m-1 skill">
+          <span class="tag my-1 ml-3 skill">
             {skill}
           </span>
           <br />

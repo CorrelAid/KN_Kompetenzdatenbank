@@ -79,7 +79,7 @@
 <nav class="level container mt-4">
 	<div class="px-2 level-left">
 		<div class="level-item">
-			<p class="title is-size-4-desktop is-size-5-mobile">
+			<p class="title is-size-4-desktop is-size-5-mobile is-size-5-tablet">
 				Kompetenzdatenbank
 			</p>
 		</div>

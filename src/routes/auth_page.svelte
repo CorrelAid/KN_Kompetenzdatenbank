@@ -57,7 +57,7 @@
   </form>
 
   <p class="is-size-4 is-size-5-mobile px-2 pb-2">
-    Gib bitte deine E-Mail-Adresse an, um einen Einladunglink für die Kompetentdatenbank zu erhalten.
+    Gib bitte deine E-Mail-Adresse an, um einen Einladungslink für die Kompetenzdatenbank zu erhalten.
   </p>
 
   <div

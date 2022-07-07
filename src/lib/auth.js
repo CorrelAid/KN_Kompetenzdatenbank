@@ -30,9 +30,10 @@ export const blankCookies = () => {
 	return [getCookie('refresh_token', null), getCookie('access_token', null), getCookie('expires_at', null)];
 };
 
-const setServerSession = async (event, session) => {
+
+const setServerSession = async (event, session, root_url) => {
 	console.log('Setting Server Session >>>', event, session);
-	await fetch('/auth', {
+	await fetch(root_url+'/auth', {
 		method: 'POST',
 		headers: new Headers({ 'Content-Type': 'application/json' }),
 		credentials: 'same-origin',
@@ -40,9 +41,9 @@ const setServerSession = async (event, session) => {
 	});
 };
 
-export const setAuthCookie = async (session) => {
-	await setServerSession('SIGNED_IN', session);
+export const setAuthCookie = async (session, root_url) => {
+	await setServerSession('SIGNED_IN', session), root_url;
 };
 export const unsetAuthCookie = async () => {
-	await setServerSession('SIGNED_OUT', null);
+	await setServerSession('SIGNED_OUT', null,  root_url);
 };

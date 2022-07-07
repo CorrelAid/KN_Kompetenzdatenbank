@@ -150,7 +150,7 @@
     <div class="loader is-loading" />
   </div>
 {:else if loaded === true}
-  <Search
+  <Search 
     number_entries={data.length}
     {flt_ment}
     {flt_orga}
@@ -222,7 +222,7 @@
   }
 
   th {
-    background: hsl(171, 100%, 41%);
+    background: #9A8B67;
     z-index: 1;
     padding: 0;
   }

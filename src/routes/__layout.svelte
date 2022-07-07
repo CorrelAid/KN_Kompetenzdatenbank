@@ -4,11 +4,10 @@
   import Footer from "$lib/Footer.svelte";
   import { session } from "$app/stores";
   import { auth, setAuthCookie, unsetAuthCookie } from "$lib/auth";
-  import { onMount } from "svelte";
   import { check_admin } from "$lib/db_queries";
 
   session.subscribe((sessionData) => {
-    console.log(sessionData);
+    var x = sessionData;
   });
 
   let check;
@@ -18,7 +17,7 @@
         
 
         (async () => {
-          await setAuthCookie(_session);
+          await setAuthCookie(_session, window.location.origin);
           const check = await check_admin(_session.user)
           
           session.set({
@@ -32,7 +31,7 @@
       } else {
         session.set({ user: undefined, authenticated: false, admin: false });
         (async () => {
-          await unsetAuthCookie(_session);
+          await unsetAuthCookie(_session, window.location.origin);
         })();
       }
     });

@@ -55,7 +55,6 @@ export const check_email = async function (x) {
       .select("email, confirmed")
       .eq("email", x.toLowerCase())
 
-      console.log(data[0]["confirmed"])
     if (data.length == 1 && data[0]["confirmed"] === true) {
       return true
     }
@@ -77,7 +76,7 @@ export const check_admin = async function (x) {
       let { data, error } = await supabase
         .from('auth_roles')
         .select("email, admin")
-        .eq("email", x.email)
+        .eq("email", x.email.toLowerCase())
 
       result = data[0].admin
     }
@@ -85,7 +84,7 @@ export const check_admin = async function (x) {
       let { data, error } = await supabase
         .from('auth_roles')
         .select("email, admin")
-        .eq("email", x)
+        .eq("email", x.toLowerCase())
 
       result = data[0].admin
     }
@@ -187,7 +186,6 @@ export const download_picture = async function (x) {
 
   const { data, error } = await supabase.storage.from('pictures').download(file_name)
 
-  console.log(data)
   return { data, error }
 }
 
