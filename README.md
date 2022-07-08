@@ -80,6 +80,7 @@ Administrators can upload data using the GUI by opening the corresponding modal.
 
 
 ## Todo
+- e is undefined when uploading pics
 - fix:
 ```
 node:internal/errors:465
