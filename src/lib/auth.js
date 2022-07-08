@@ -42,7 +42,7 @@ const setServerSession = async (event, session, root_url) => {
 };
 
 export const setAuthCookie = async (session, root_url) => {
-	await setServerSession('SIGNED_IN', session), root_url;
+	await setServerSession('SIGNED_IN', session, root_url);
 };
 export const unsetAuthCookie = async () => {
 	await setServerSession('SIGNED_OUT', null,  root_url);
